@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import page_image from "../photos/page_image.jpg";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#1565c0",
@@ -78,7 +80,11 @@ export default function Patients(props) {
         height: '100vh', 
         padding: 2,
         position: 'relative', 
-        backgroundColor: '#90caf9',
+        backgroundImage: `url(${page_image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: '100vh',
       }}
     >
 
@@ -102,7 +108,11 @@ export default function Patients(props) {
           
         }}
       >
-        <TableContainer component={Paper} sx={{ height: '90%' }}>
+        <TableContainer component={Paper} 
+        sx={{ maxHeight: '90%',background: 'rgba(33, 137, 228, 0.24)', 
+              borderRadius: '16px',
+              border: '1px solid rgba(33, 137, 228, 0.34)',
+              opacity:'90%'}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

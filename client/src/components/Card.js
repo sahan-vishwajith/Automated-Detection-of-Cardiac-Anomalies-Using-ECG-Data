@@ -8,7 +8,12 @@ import { Link } from 'react-router-dom';
 
 export default function Cards(props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ background: 'rgba(33, 137, 228, 0.24)', 
+      borderRadius: '16px',
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+      backdropFilter: 'blur(5px)',
+      WebkitBackdropFilter: 'blur(5px)',
+      border: '1px solid rgba(33, 137, 228, 0.34)',maxWidth:'340px' }}>
       <CardActionArea>
         <CardMedia
           component="img"

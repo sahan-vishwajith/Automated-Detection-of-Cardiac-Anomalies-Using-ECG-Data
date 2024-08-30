@@ -10,8 +10,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Homebttn from "../components/Homebttn.js";
+import Homebttn from "../components/LogOutbttn.js.js";
 import { useNavigate } from 'react-router-dom';
+import page_image from "../photos/page_image.jpg";
+import { Link } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -61,8 +63,11 @@ export default function SignIn() {
       <CssBaseline />
       <Box
         sx={{
-          backgroundColor: '#90caf9',
-          minHeight: '100vh',
+          backgroundImage: `url(${page_image})`, // Set the background image
+          backgroundSize: 'cover', // Ensure the image covers the entire area
+          backgroundPosition: 'center', // Center the background image
+          height: '100vh', // Full viewport height
+          position: 'relative', // To position th
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -75,7 +80,9 @@ export default function SignIn() {
             left: 16,
           }}
         >
-          <Homebttn />
+          <Button variant="contained" color="primary" component={Link} to='/'>
+          Back
+        </Button>
         </Box>
         <Container component="main" maxWidth="xs">
           <Box
@@ -83,7 +90,12 @@ export default function SignIn() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              backgroundColor: 'white',
+              background: 'rgba(33, 137, 228, 0.24)', 
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(5px)',
+              WebkitBackdropFilter: 'blur(5px)',
+              border: '1px solid rgba(33, 137, 228, 0.34)', 
               padding: 3,
               borderRadius: 2,
               boxShadow: 3,
