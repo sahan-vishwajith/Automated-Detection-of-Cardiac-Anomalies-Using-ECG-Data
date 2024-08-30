@@ -17,6 +17,7 @@ const DoctorSchema = new mongoose.Schema({
     id:{
         type:String,
         required:true,
+        unique:true,
     },
     address:{
         type: String,

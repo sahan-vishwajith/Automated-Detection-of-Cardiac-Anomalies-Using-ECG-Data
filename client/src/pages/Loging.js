@@ -42,6 +42,8 @@ export default function SignIn() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formValues), // Send form values from state
+        credentials: 'include',
+
       });
 
       if (response.ok) {

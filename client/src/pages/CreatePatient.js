@@ -17,6 +17,8 @@ export default function PatientForm() {
         gender: '',
         email: '',
         medicalHistory: '',
+        idNumber:'',
+        doctor:'',
     });
 
     const handleChange = (event) => {
@@ -35,13 +37,15 @@ export default function PatientForm() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formValues), // Send form values from state
+            body: JSON.stringify(formValues),
+            credentials: 'include',
             });
             console.log(response)
             if (response.ok) {
-            navigate('/Doc/Predict'); 
+              const data = response.json()
+              navigate('/Doc/Predict',{state:{patient:data}}); 
             } else {
-            alert('Something went wrong. Please try again.'); 
+              alert('Something went wrong. Please try again.'); 
             }
         } catch (error) {
             alert('An error occurred. Please try again later.'); 
@@ -75,6 +79,17 @@ export default function PatientForm() {
             autoComplete="name"
             margin="normal"
             value={formValues.name}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            fullWidth
+            id="idNumber"
+            label="IdNumber"
+            name="idNumber"
+            autoComplete="ID Number"
+            margin="normal"
+            value={formValues.idNumber}
             onChange={handleChange}
           />
           <TextField
@@ -117,6 +132,7 @@ export default function PatientForm() {
           </TextField>
           <TextField
             fullWidth
+            required
             id="email"
             label="Email"
             name="email"
@@ -135,6 +151,17 @@ export default function PatientForm() {
             rows={4}
             margin="normal"
             value={formValues.medicalHistory}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            fullWidth
+            id="doctor"
+            label="Doctor"
+            name="doctor"
+            autoComplete="Doctor ID"
+            margin="normal"
+            value={formValues.doctor}
             onChange={handleChange}
           />
           <Button

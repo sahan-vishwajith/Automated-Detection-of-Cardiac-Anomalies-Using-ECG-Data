@@ -10,5 +10,5 @@ router.post('/',registerDoctor)
 router.post('/login',loginDoctor)
 router.post('/createP',cookieAuth, createPatient)
 
-router.get('/Patients', cookieAuth , getAllPatients)
+router.get('/patients', cookieAuth , getAllPatients)
 export default router;

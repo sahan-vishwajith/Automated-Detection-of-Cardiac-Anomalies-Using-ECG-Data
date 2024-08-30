@@ -29,7 +29,10 @@ mongoose.connection.on("connected", ()=>{
 
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3001', // Replace with your frontend URL
+    credentials: true, // Allow credentials (cookies)
+  }));
 
 app.use('/Doc',doctorRoute)
 
