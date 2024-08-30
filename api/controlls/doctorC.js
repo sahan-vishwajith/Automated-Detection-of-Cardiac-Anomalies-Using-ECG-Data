@@ -31,7 +31,7 @@ export const loginDoctor = async (req,res,next)=>{
         if(!isPasswordCorrect) 
             return next(createError(404,"Wrong password or username..."))
 
-        const token = jwt.sign({id:doctor._id }, process.env.JWT)
+        const token = jwt.sign({id:doctor.id }, process.env.JWT)
         const {password, ...otherdetails} = doctor._doc;
 
         res.cookie("access_token", token,{

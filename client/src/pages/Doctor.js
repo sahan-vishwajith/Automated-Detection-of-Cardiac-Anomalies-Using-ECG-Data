@@ -8,21 +8,6 @@ import Homebttn from "../components/Homebttn.js";
 import { useNavigate } from 'react-router-dom';
 
 export default function Doctor() {
-  // const navigate = useNavigate()
-
-  // const handlePatientClick = async () => {
-  //   try {
-  //     const response = await fetch('http://localhost:3000/Doc',{method:'GET'}); // Replace with your actual endpoint
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       navigate('/Doc/Patients', { state: { patientsData: data } });
-  //     } else {
-  //       alert('Failed to fetch patients.');
-  //     }
-  //   } catch (error) {
-  //     alert('An error occurred. Please try again later.');
-  //   }
-  // };
 
   return (
     <Box
@@ -63,7 +48,7 @@ export default function Doctor() {
         </Link>
 
         {/* Link wrapping the second card */}
-        <Link to="/Doc/Predict" style={{ textDecoration: 'none' }}>
+        <Link to="/Doc/createP" style={{ textDecoration: 'none' }}>
           <Cards
             img={ecg_prediction}
             title="Predict CVD"

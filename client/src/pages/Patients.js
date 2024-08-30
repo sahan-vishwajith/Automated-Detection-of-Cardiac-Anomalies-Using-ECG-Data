@@ -45,11 +45,13 @@ export default function Patients(props) {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await fetch('http://localhost:3000/Doc/Patients', {
+        const response = await fetch('http://localhost:3000/Doc/patients', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
+
         });
 
         if (response.ok) {
@@ -104,22 +106,32 @@ export default function Patients(props) {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="right">Name</StyledTableCell>
-                <StyledTableCell align="right">BirthDay</StyledTableCell>
-                <StyledTableCell align="right">Gender</StyledTableCell>
-                <StyledTableCell align="right">Medical History</StyledTableCell>
+              <StyledTableCell align="center">ID Number</StyledTableCell>
+                <StyledTableCell align="center">Name</StyledTableCell>
+                <StyledTableCell align="center">BirthDay</StyledTableCell>
+                <StyledTableCell align="center">Gender</StyledTableCell>
+                <StyledTableCell align="center">Medical History</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {patients.map((patient) => (
                 // key ? email is the unique eliment
-                <StyledTableRow key={patient.email}>  
-                  <StyledTableCell component="th" scope="row">
-                    {patient.name}
+                <StyledTableRow key={patient.idNumber}>  
+                  <StyledTableCell component="th" scope="row" align='center'>
+                    <Link 
+                      to={{
+                        pathname: `/Doc/Predict`,
+                      }} 
+                      state={{ patient: patient }}
+                      style={{ textDecoration: 'none', color: 'Blue' }} 
+                    >
+                      {patient.idNumber}
+                    </Link>
                   </StyledTableCell>
-                  <StyledTableCell align="right">{patient.bday}</StyledTableCell>
-                  <StyledTableCell align="right">{patient.gender}</StyledTableCell>
-                  <StyledTableCell align="right">{patient.medicalHistory}</StyledTableCell>
+                  <StyledTableCell align="center">{patient.name}</StyledTableCell>
+                  <StyledTableCell align="center">{patient.bday.split('T')[0]}</StyledTableCell>
+                  <StyledTableCell align="center">{patient.gender}</StyledTableCell>
+                  <StyledTableCell align="center">{patient.medicalHistory}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

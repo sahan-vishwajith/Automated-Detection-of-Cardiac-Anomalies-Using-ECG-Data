@@ -10,11 +10,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import patientimg from '../photos/patients.jpg';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Predict() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [prediction, setPrediction] = useState('');
+
+  const location = useLocation();
+  const {patient} = location.state || {}
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -83,16 +86,16 @@ export default function Predict() {
                   Patient Details
                 </Typography>
                 <Typography variant="body1" color="white">
-                  Name: John Doe
+                  Name: {patient.name}
                 </Typography>
                 <Typography variant="body1" color="white">
-                  Birthday: 01/01/1980
+                  Birthday: {patient.bday.split('T')[0]}
                 </Typography>
                 <Typography variant="body1" color="white">
-                  City: New York
+                  City: {patient.address}
                 </Typography>
                 <Typography variant="body1" color="white">
-                  Medical History: Hypertension
+                  Medical History: {patient.medicalHistory}
                 </Typography>
                 {/* Add more patient details as needed */}
               </CardContent>
