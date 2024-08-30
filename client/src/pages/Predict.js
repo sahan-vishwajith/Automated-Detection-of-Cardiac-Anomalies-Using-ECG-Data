@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import patientimg from '../photos/patients.jpg';
+import page_image from "../photos/page_image.jpg"; 
 
 import { Link, useLocation } from 'react-router-dom';
 
@@ -39,12 +40,19 @@ export default function Predict() {
     }
   };
 
+  const submitPrediction=()=>{
+    
+  }
+
   return (
     <Box
       sx={{
         flexGrow: 1,
         height: '100vh',
-        backgroundColor: '#90caf9',
+        backgroundImage: `url(${page_image})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        height: '100vh', 
         padding: 3,
         display: 'flex',
         alignItems: 'center',
@@ -77,7 +85,12 @@ export default function Predict() {
               sx={{
                 width: '80%',
                 maxWidth: 400,
-                backgroundColor: '#42a5f5',
+                background: 'rgba(33, 137, 240, 0.24)', 
+                borderRadius: '16px',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                backdropFilter: 'blur(5px)',
+                WebkitBackdropFilter: 'blur(5px)',
+                border: '1px solid rgba(33, 137, 228, 0.34)',
               }}
             >
               <CardMedia component="img" height="230" image={patientimg} alt="" />
@@ -124,7 +137,12 @@ export default function Predict() {
               sx={{
                 marginBottom: 2,
                 '& .MuiInputBase-root': {
-                  backgroundColor: '#42a5f5',
+                  background: 'rgba(33, 137, 228, 0.24)', 
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)',
+                  border: '1px solid rgba(33, 137, 228, 0.34)',
                   color: 'white',
                 },
                 '& .MuiButtonBase-root': {
@@ -132,7 +150,8 @@ export default function Predict() {
                 },
               }}
             />
-            <Button variant="contained" sx={{ backgroundColor: '#1565c0', color: 'white' }} onClick={handleSubmit}>
+            <Button variant="contained" sx={{ background: '#1565c0', 
+                    color: 'white' }} onClick={handleSubmit}>
               Submit
             </Button>
 
@@ -144,7 +163,12 @@ export default function Predict() {
                   width: '90%',
                   textAlign: 'center',
                   marginTop: 2,
-                  backgroundColor: '#42a5f5',
+                  background: 'rgba(33, 137, 228, 0.24)', 
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                  backdropFilter: 'blur(5px)',
+                  WebkitBackdropFilter: 'blur(5px)',
+                  border: '1px solid rgba(33, 137, 228, 0.34)',
                   color: 'white',
                 }}
               >
@@ -161,6 +185,7 @@ export default function Predict() {
                   backgroundColor: '#1565c0',
                   color: 'white',
                 }}
+                onClick={submitPrediction}
               >
                 Submit Prediction
               </Button>

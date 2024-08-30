@@ -1,19 +1,21 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import Cards from '../components/Card';
 import patients from "../photos/patients.jpg";
 import ecg_prediction from "../photos/ecg_predict.jpg";
-import Homebttn from "../components/Homebttn.js";
-import { useNavigate } from 'react-router-dom';
+import LogOutBttn from "../components/LogOutbttn.js.js";
+import page_image from "../photos/page_image.jpg"; 
 
 export default function Doctor() {
 
   return (
     <Box
       sx={{
-        backgroundColor: '#90caf9',
-        height: '100vh', // Full viewport height
+        backgroundImage: `url(${page_image})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        height: '100vh', 
         position: 'relative', // To position the Homebttn absolutely
       }}
     >
@@ -21,11 +23,11 @@ export default function Doctor() {
       <Box
         sx={{
           position: 'absolute',
-          top: 16,
-          left: 16,
+          top: 20,
+          right: 16,
         }}
       >
-        <Homebttn />
+        <LogOutBttn />
       </Box>
 
       {/* Cards centered on the page */}
@@ -43,7 +45,7 @@ export default function Doctor() {
           <Cards
             img={patients}
             title="View Patients"
-            desc="View your patient details."
+            desc="View your patient details and make a CVD prediction for an existing patient."
           />
         </Link>
 
@@ -52,7 +54,7 @@ export default function Doctor() {
           <Cards
             img={ecg_prediction}
             title="Predict CVD"
-            desc="Predict CVD using ECG data."
+            desc="Make CVD predictions for a new Patient using ECG data."
           />
         </Link>
       </Box>
