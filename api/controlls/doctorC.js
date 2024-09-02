@@ -13,6 +13,7 @@ export const registerDoctor = async (req,res,next)=>{
         email: req.body.email,
         address: req.body.address,
         id: req.body.id,
+        bday: req.body.bday,
         password: hash,
        })
        await newDoctor.save()

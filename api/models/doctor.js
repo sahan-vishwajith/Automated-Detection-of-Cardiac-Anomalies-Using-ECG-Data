@@ -14,6 +14,10 @@ const DoctorSchema = new mongoose.Schema({
         type: String,
         required : true,
     },
+    bday:{
+        type: Date,
+        required : true,
+    },
     id:{
         type:String,
         required:true,
