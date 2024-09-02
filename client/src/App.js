@@ -1,12 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Landing from './pages/Landing';
-import SignIn from './pages/Loging';
-import Doctor from './pages/Doctor';
-import Patients from './pages/Patients';
-import Predict from './pages/Predict';
-import PatientForm from './pages/CreatePatient';
+import Landing from './pages/doctor/Landing';
+import SignIn from './pages/doctor/Loging';
+import Doctor from './pages/doctor/Doctor';
+import Patients from './pages/doctor/Patients';
+import Predict from './pages/doctor/Predict';
+import PatientForm from './pages/doctor/CreatePatient';
+
+import AdminLogin from './pages/admin/ALogin';
+import Doctors from './pages/admin/ViewDoc';
+import Admin from './pages/admin/Admin';
+import DoctorForm from './pages/admin/ACreateDoc';
+
+import PatientLogin from './pages/patient/Plogin.js';
+import PatientCard from './pages/patient/ViewDetails.js';
+import PatientEditForm from './pages/patient/EditDetails.js';
 
 function App() {
   return (
@@ -18,10 +27,17 @@ function App() {
         <Route path='/Doc/patients' element={<Patients />} />
         <Route path='/Doc/Predict' element={<Predict />} />
         <Route path='/Doc/createP' element={<PatientForm />} />
+
+        <Route path='/Admin/login' element={<AdminLogin/>}/>
+        <Route path='/Admin/Doctors' element={<Doctors/>}/>
+        <Route path='/Admin' element={<Admin/>}/>
+        <Route path='/Admin/createD' element={<DoctorForm/>}/>
+
+        <Route path='/Patient/login' element={<PatientLogin/>}/> 
+        <Route path='/Patient' element={<PatientCard/>}/>    
+        <Route path='/Patient/edit' element={<PatientEditForm/>}/>    
       </Routes>
     </Router>
-
-
   );
 }
 

@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import doctorRoute from "./routes/doctor.js"
+import adminRoute from "./routes/admin.js"
+import patientRoute from "./routes/patient.js"
 import cookieParser from "cookie-parser"
 import http from 'http';
 import WebSocket from 'ws';
@@ -35,7 +37,8 @@ app.use(cors({
   }));
 
 app.use('/Doc',doctorRoute)
-
+app.use('/Admin', adminRoute)
+app.use('/Patient',patientRoute)
 
 app.use((err,req,res,next)=>{
     const errorStatus = err.status || 500

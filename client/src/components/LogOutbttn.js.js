@@ -4,7 +4,7 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link , useNavigate} from 'react-router-dom';
 
-export default function IconLabelButtons() {
+export default function IconLabelButtons(props) {
   const navigate = useNavigate()
   const handleLogout = async ()=>{
     try{
@@ -23,17 +23,17 @@ export default function IconLabelButtons() {
 
   return (
     <Button
-      variant="contained" 
-      startIcon={<LogoutIcon />}
-      onClick={handleLogout}
-      sx={{
-        backgroundColor: '#0d47a1', 
-        color: 'white',          
-        '&:hover': {
-          backgroundColor: '#1a237e',
-        },
-      }}
-    >
+    variant="contained" 
+    startIcon={<LogoutIcon />}
+    onClick={handleLogout}
+    sx={{
+      backgroundColor: props.color, 
+      color: 'white',          
+      '&:hover': {
+        backgroundColor: props.hcolor,
+      },
+    }}
+  >
       Log Out
     </Button>
   );

@@ -6,7 +6,7 @@ import { createPatient, getAllPatients } from "../controlls/patientC.js"
 const router= express.Router()
 
 //create
-router.post('/',registerDoctor)
+
 router.post('/login',loginDoctor)
 router.post('/createP',cookieAuth, createPatient)
 
