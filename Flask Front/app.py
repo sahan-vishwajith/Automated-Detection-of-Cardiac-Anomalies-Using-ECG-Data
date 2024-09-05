@@ -9,52 +9,52 @@ def load_model():
 
 cnn = load_model()
 
-# Load the test dataset
-test_df = pd.read_csv('mitbih_test.csv', header=None)
-
 # Define class labels
 Classes = ["Normal Beat", "Supraventricular premature", 
            "Premature ventricular", "Fusion beats", "Unknown beats"]
 
-# User selects a sample from the test dataset
-sample_index = st.slider("Select Sample Index", 0, len(test_df) - 1, 0)
+# Create a file uploader for user to upload a CSV file
+st.subheader("Upload an ECG CSV file for Prediction")
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
-# Extract the selected sample
-selected_sample = test_df.iloc[sample_index, :-1]  # ECG signal (first 187 values)
-actual_class = int(test_df.iloc[sample_index, -1])  # Actual class (last value)
+# If the user has uploaded a file
+if uploaded_file is not None:
+    # Load the uploaded CSV file
+    uploaded_data = pd.read_csv(uploaded_file, header=None)
 
-# Display the selected sample and actual class
-st.subheader("Selected Sample ECG Signal")
-st.line_chart(selected_sample)
+    # Ensure the sample has 188 columns (187 for signal, 1 for actual class)
+    if uploaded_data.shape[1] != 188:
+        st.error('The uploaded file must have exactly 188 columns (187 ECG data points and 1 actual class).')
+    else:
+        # Show "Predict" button
+        if st.button("Predict"):
+            # Extract the first 187 columns as the ECG signal
+            signal = uploaded_data.iloc[0, :-1]
+            actual_class = int(uploaded_data.iloc[0, -1])
 
-st.write(f"**Actual Category:** {Classes[actual_class]}")
+            # Visualize the ECG signal
+            st.subheader("ECG Signal Visualization")
+            st.line_chart(signal)
 
-# Ensure the sample has 187 features and reshape for model input
-if selected_sample.shape[0] != 187:
-    st.error('Selected sample does not have 187 features!')
-else:
-    # Reshape the sample to fit the model's input shape (1, 187, 1)
-    signal = selected_sample.to_numpy().reshape(1, 187, 1)
+            # Reshape the signal for model input (1, 187, 1)
+            signal = signal.to_numpy().reshape(1, 187, 1)
 
-    # Predict the class using the model
-    y_predict = cnn.predict(signal)
-    predicted_class = int(y_predict.argmax(axis=-1))
+            # Predict the class using the model
+            y_predict = cnn.predict(signal)
+            predicted_class = int(y_predict.argmax(axis=-1))
 
-    # Display the predicted class
-    st.write(f"**Predicted Category:** {Classes[predicted_class]}")
+            # Display the predicted class
+            st.write(f"**Predicted Category:** {Classes[predicted_class]}")
 
-    # Display the prediction probabilities for each class
-    df = pd.DataFrame(y_predict, columns=Classes)
-    st.subheader("Prediction Probabilities")
-    st.dataframe(df.style.format("{:.2%}"))
+            # Display the actual class
+            st.write(f"**Actual Category:** {Classes[actual_class]}")
 
-    # Optionally add a bar chart for better visualization
-    df_transposed = df.T
-    df_transposed = df_transposed.reindex(Classes)
-    st.bar_chart(df_transposed)
+            # Display the prediction probabilities for each class
+            df = pd.DataFrame(y_predict, columns=Classes)
+            st.subheader("Prediction Probabilities")
+            st.dataframe(df.style.format("{:.2%}"))
 
-	# Ensure that the DataFrame index is in the correct order
-	
-
-	# Plot the bar chart
-	
+            # Optionally add a bar chart for better visualization
+            df_transposed = df.T
+            df_transposed = df_transposed.reindex(Classes)
+            st.bar_chart(df_transposed)
