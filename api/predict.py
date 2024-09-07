@@ -140,6 +140,32 @@ def load_and_preprocess_input(file_paths):
         logging.error(f'Error during preprocessing: {e}')
         raise e
 
+def get_beat_meaning(symbol):
+    beat_meanings = {
+        'N': 'Normal beat',
+        'L': 'Left bundle branch block beat',
+        'R': 'Right bundle branch block beat',
+        'A': 'Atrial premature beat',
+        'a': 'Aberrated atrial premature beat',
+        'J': 'Nodal (junctional) premature beat',
+        'S': 'Supraventricular premature beat',
+        'V': 'Premature ventricular contraction',
+        'F': 'Fusion of ventricular and normal beat',
+        '[': 'Start of ventricular flutter/fibrillation',
+        '!': 'Ventricular flutter wave',
+        ']': 'End of ventricular flutter/fibrillation',
+        'e': 'Atrial escape beat',
+        'j': 'Nodal (junctional) escape beat',
+        'E': 'Ventricular escape beat',
+        '/': 'Paced beat',
+        'f': 'Fusion of paced and normal beat',
+        'x': 'Non-conducted P-wave (blocked APB)',
+        'Q': 'Unclassifiable beat',
+        '|': 'Isolated QRS-like artifact',
+    }
+    return beat_meanings.get(symbol, 'Unknown symbol')
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     logging.info('Received prediction request')
@@ -169,12 +195,12 @@ def predict():
 
             counter = Counter(predicted_labels)
             most_common_label, count = counter.most_common(1)[0]
-
+            most_common_amly=get_beat_meaning(most_common_label)
             # Generate ECG plot
             ecg_plot_image = plot_ecg_signal(X_test, 10)
 
             return jsonify({
-                'prediction': most_common_label,
+                'prediction': most_common_amly,
                 'ecg_plot': ecg_plot_image
             })
 
