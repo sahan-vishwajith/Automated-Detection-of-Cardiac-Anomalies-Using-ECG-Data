@@ -6,8 +6,7 @@ import doctorRoute from "./routes/doctor.js"
 import adminRoute from "./routes/admin.js"
 import patientRoute from "./routes/patient.js"
 import cookieParser from "cookie-parser"
-import http from 'http';
-import WebSocket from 'ws';
+import generalRoute from "./routes/general.js"
 
 
 const app = express()
@@ -39,6 +38,7 @@ app.use(cors({
 app.use('/Doc',doctorRoute)
 app.use('/Admin', adminRoute)
 app.use('/Patient',patientRoute)
+app.use('',generalRoute)
 
 app.use((err,req,res,next)=>{
     const errorStatus = err.status || 500

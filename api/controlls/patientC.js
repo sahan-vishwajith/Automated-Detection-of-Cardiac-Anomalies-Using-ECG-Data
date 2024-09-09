@@ -2,6 +2,7 @@ import Patient from "../models/patient.js"
 import Doctor from "../models/doctor.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import patient from "../models/patient.js"
 
 
 export const editPatient = async (req,res,next)=>{
@@ -60,6 +61,15 @@ export const getAllPatients = async (req,res,next)=>{
         const patients = await Patient.find({doctor:doctorID})
         return res.status(200).json(patients)
     }catch(err){
+        next(err)
+    }
+}
+
+export const getPatientsForDashBoard = async (req,res,next)=>{
+    try {
+        const patients = await Patient.find().select('location name bday gender doctor id')
+        return res.status(200).json(patients)
+    } catch (error) {
         next(err)
     }
 }

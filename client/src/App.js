@@ -17,6 +17,8 @@ import PatientLogin from './pages/patient/Plogin.js';
 import PatientCard from './pages/patient/ViewDetails.js';
 import PatientEditForm from './pages/patient/EditDetails.js';
 
+import DashBoard from './pages/dashboard.js'
+
 function App() {
   return (
     <Router>
@@ -35,7 +37,9 @@ function App() {
 
         <Route path='/Patient/login' element={<PatientLogin/>}/> 
         <Route path='/Patient' element={<PatientCard/>}/>    
-        <Route path='/Patient/edit' element={<PatientEditForm/>}/>    
+        <Route path='/Patient/edit' element={<PatientEditForm/>}/>  
+
+        <Route path='/dashboard' element={<DashBoard/>}  />
       </Routes>
     </Router>
   );

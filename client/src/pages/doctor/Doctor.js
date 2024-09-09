@@ -6,8 +6,12 @@ import patients from "./photos/patients.jpg";
 import ecg_prediction from "./photos/ecg_predict.jpg";
 import LogOutBttn from "../../components/LogOutbttn.js.js";
 import page_image from "./photos/page_image.jpg"; 
+import dashbord from "./photos/dashbord.jpg"
+
 
 export default function Doctor() {
+
+
 
   return (
     <Box
@@ -19,7 +23,6 @@ export default function Doctor() {
         position: 'relative', // To position the Homebttn absolutely
       }}
     >
-      {/* Homebttn at the top right corner */}
       <Box
         sx={{
           position: 'absolute',
@@ -40,7 +43,7 @@ export default function Doctor() {
           gap: 10, // Space between the cards
         }}
       >
-        {/* Link wrapping the first card */}
+
         <Link to='/Doc/patients' style={{ textDecoration: 'none' }}>
           <Cards
             img={patients}
@@ -51,7 +54,6 @@ export default function Doctor() {
           />
         </Link>
 
-        {/* Link wrapping the second card */}
         <Link to="/Doc/createP" style={{ textDecoration: 'none' }}>
           <Cards
             img={ecg_prediction}
@@ -61,7 +63,21 @@ export default function Doctor() {
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
         </Link>
+
+        <Link to="/dashboard"  //change here for the dashbord url
+        style={{ textDecoration: 'none' }}
+        // onClick={getDetails}>
+        >
+          <Cards
+            img={dashbord}
+            title="Veiw Dashboard"
+            desc="Summarize and visualize the results for better understanding."
+            bg='rgba(33, 137, 228, 0.24)'
+            border= '1px solid rgba(33, 137, 228, 0.34)'
+          />
+        </Link>
       </Box>
     </Box>
   );
 }
+

@@ -43,6 +43,9 @@ const PatientSchema = new mongoose.Schema({
         required : true,
         unique:true,
     },
+    location:{
+        type:[String],
+    }
 } )
 
 export default mongoose.model("Patient" , PatientSchema)

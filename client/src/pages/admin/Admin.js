@@ -6,6 +6,7 @@ import patients from "./photos/patients.jpg";
 import register from "./photos/register.jpg"
 import LogOutBttn from "../../components/LogOutbttn.js.js";
 import page_image from "./photos/page_image.jpg"; 
+import dashbord from './photos/dashbord.jpg'
 
 export default function Admin() {
 
@@ -57,6 +58,16 @@ export default function Admin() {
             img={register}
             title="Register a Doctor"
             desc="To register a new doctor click here."
+            bg= 'rgba(249, 74, 51, 0.38)'
+            border='1px solid rgba(251, 120, 22, 0.3)'
+          />
+        </Link>
+        <Link to="/dashboard"  // change here for the dashbord url
+        style={{ textDecoration: 'none' }}>
+          <Cards
+            img={dashbord}
+            title="Veiw Dashboard"
+            desc="Summarize and visualize the results for better understanding."
             bg= 'rgba(249, 74, 51, 0.38)'
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
