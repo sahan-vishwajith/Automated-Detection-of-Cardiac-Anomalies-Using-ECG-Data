@@ -1,51 +1,55 @@
 import mongoose from "mongoose";
 
 const PatientSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
-        required : true,
+        required: true,
     },
-    idNumber:{
+    idNumber: {
         type: String,
-        required : true,
-        unique:true,
+        required: true,
+        unique: true,
     },
-    address:{
+    address: {
         type: String,
-        required : true,
+        required: true,
     },
-    bday:{
+    bday: {
         type: Date,
-        required : true,
+        required: true,
     },
-    gender:{
+    gender: {
         type: String,
-        required : true,
+        required: true,
     },
-    email:{
+    email: {
         type: String,
-        required : true,
+        required: true,
         unique: true
     },
-    medicalHistory:{
-        type:[String]
+    medicalHistory: {
+        type: [String]
     },
-    doctor:{
-        type:String,
-        required :true
-    },
-    password:{
+    doctor: {
         type: String,
-        required : true,
-    }
-    ,username:{
-        type: String,
-        required : true,
-        unique:true,
+        required: true
     },
-    location:{
-        type:[String],
+    password: {
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    location: {
+        type: [String],
+    },
+    coords: {
+        type: [Number], // Array of numbers to store latitude and longitude
+        index: '2dsphere' // Indexing for geospatial queries
     }
-} )
+});
 
-export default mongoose.model("Patient" , PatientSchema)
+export default mongoose.model("Patient", PatientSchema);
