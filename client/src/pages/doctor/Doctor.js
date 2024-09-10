@@ -49,7 +49,7 @@ export default function Doctor() {
             img={patients}
             title="View Patients"
             desc="View your patient details and make a CVD prediction for an existing patient."
-            bg='rgba(33, 137, 228, 0.24)'
+            bg="rgba(255, 255, 255, 0.8)"
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
         </Link>
@@ -59,7 +59,7 @@ export default function Doctor() {
             img={ecg_prediction}
             title="Predict CVD"
             desc="Make CVD predictions for a new Patient using ECG data."
-            bg='rgba(33, 137, 228, 0.24)'
+            bg="rgba(255, 255, 255, 0.8)"
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
         </Link>
@@ -72,7 +72,7 @@ export default function Doctor() {
             img={dashbord}
             title="Veiw Dashboard"
             desc="Summarize and visualize the results for better understanding."
-            bg='rgba(33, 137, 228, 0.24)'
+            bg="rgba(255, 255, 255, 0.8)"
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
         </Link>

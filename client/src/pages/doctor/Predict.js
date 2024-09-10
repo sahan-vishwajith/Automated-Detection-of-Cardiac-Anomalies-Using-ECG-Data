@@ -103,14 +103,14 @@ export default function Predict() {
         {/* Left Side - Patient Details */}
         <Grid item xs={12} md={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-            <Card sx={{ width: '80%', maxWidth: 400, background: 'rgba(33, 137, 240, 0.24)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
+            <Card sx={{ width: '80%', maxWidth: 400, background: 'rgba(255, 255, 255, 0.8)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
               <CardMedia component="img" height="230" image={patientimg} alt="" />
               <CardContent>
-                <Typography variant="h5" component="div" color="white">Patient Details</Typography>
-                <Typography variant="body1" color="white">Name: {patient.name}</Typography>
-                <Typography variant="body1" color="white">Birthday: {patient.bday.split('T')[0]}</Typography>
-                <Typography variant="body1" color="white">City: {patient.address}</Typography>
-                <Typography variant="body1" color="white">Medical History: {patient.medicalHistory}</Typography>
+                <Typography variant="h5" component="div" >Patient Details</Typography>
+                <Typography variant="body1" >Name: {patient.name}</Typography>
+                <Typography variant="body1" >Birthday: {patient.bday.split('T')[0]}</Typography>
+                <Typography variant="body1" >City: {patient.address}</Typography>
+                <Typography variant="body1" >Medical History: {patient.medicalHistory}</Typography>
               </CardContent>
             </Card>
           </Box>

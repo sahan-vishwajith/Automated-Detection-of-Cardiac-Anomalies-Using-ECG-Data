@@ -109,7 +109,7 @@ export default function AdminLogin() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              background: 'rgba(167, 29, 239, 0.31)', 
+              background: "rgba(255, 255, 255, 0.8)", 
               borderRadius: '16px',
               boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
               backdropFilter: 'blur(5px)',

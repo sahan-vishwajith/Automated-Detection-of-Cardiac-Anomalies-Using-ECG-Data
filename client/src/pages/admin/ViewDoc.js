@@ -112,7 +112,7 @@ export default function Doctors(props) {
         }}
       >
         <TableContainer component={Paper} 
-        sx={{ maxHeight: '90%',background: 'rgba(33, 137, 228, 0.24)', 
+        sx={{ maxHeight: '90%',background: "rgba(255, 255, 255, 0.8)", 
               borderRadius: '16px',
               border: '1px solid rgba(33, 137, 228, 0.34)',
               opacity:'90%'}}>

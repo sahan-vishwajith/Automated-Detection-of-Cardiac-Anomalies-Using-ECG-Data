@@ -47,7 +47,7 @@ export default function Admin() {
             img={patients}
             title="View Doctors"
             desc="Access the details of doctors through here."
-            bg= 'rgba(249, 74, 51, 0.38)'
+            bg= "rgba(255, 255, 255, 0.8)"
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
         </Link>
@@ -58,7 +58,7 @@ export default function Admin() {
             img={register}
             title="Register a Doctor"
             desc="To register a new doctor click here."
-            bg= 'rgba(249, 74, 51, 0.38)'
+            bg= "rgba(255, 255, 255, 0.8)"
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
         </Link>
@@ -68,7 +68,7 @@ export default function Admin() {
             img={dashbord}
             title="Veiw Dashboard"
             desc="Summarize and visualize the results for better understanding."
-            bg= 'rgba(249, 74, 51, 0.38)'
+            bg= "rgba(255, 255, 255, 0.8)"
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
         </Link>

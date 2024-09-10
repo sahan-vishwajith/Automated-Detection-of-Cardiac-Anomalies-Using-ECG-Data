@@ -94,7 +94,7 @@ export default function PatientForm() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            background: 'rgba(33, 137, 228, 0.24)',
+            background: 'rgba(255, 255, 255, 0.9)',
             borderRadius: '16px',
             boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(5px)',

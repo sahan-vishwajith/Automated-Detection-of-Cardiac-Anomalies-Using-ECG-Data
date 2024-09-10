@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import page_image from "./doctor/photos/page_image.jpg";
+import { Link } from "react-router-dom";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -88,6 +89,18 @@ export default function Dashboard() {
         boxSizing: 'border-box',
       }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 16,
+          left: 16,
+        }}
+      >
+      <Button variant="contained" color="primary" component={Link} to='/Doc'>
+          Back
+      </Button>
+      </Box>
+
       <div style={{ height: "80vh", width: "80%", margin: "0 auto" }}>
         <h1>Sri Lanka Population Density Map</h1>
         <Button 
