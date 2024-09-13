@@ -105,3 +105,17 @@ export const loginPatient = async (req, res, next) => {
         next(err);
     }
 };
+
+export const updateMedicalHistory = async (req,res,next)=>{
+    const pid =  req.body.id
+    const newDetails = req.body.medical
+    try{
+        const patient = await Patient.findOneAndUpdate({id:pid},{ $push: { medicalHistory: newDetails } })
+        if (!patient) {
+            return res.status(404).json({ message: "Patient not found" });
+          }
+          res.status(200).json(patient);
+        } catch (error) {
+            next(error); 
+        }    
+    }

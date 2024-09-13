@@ -11,7 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import patientimg from './photos/patients.jpg';
 import page_image from "./photos/page_image.jpg";
 import axios from 'axios'; 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loadingGif from './photos/ecg-gif-unscreen.gif'; // Adjusted path
 
 export default function Predict() {
@@ -21,6 +21,7 @@ export default function Predict() {
   const [ecgPlot, setEcgPlot] = useState(''); // State to store ECG plot
 
   const location = useLocation();
+  const navigate = useNavigate();
   const { patient } = location.state || {};
 
   const handleFileChange = (event) => {
@@ -79,6 +80,36 @@ export default function Predict() {
       alert('Please select all required files before submitting.');
     }
   };
+
+  const handlePredictSubmit= async ()=>{
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    const medical  = `${prediction} - (${year}.${month}.${day})`
+    const patientId = patient.id
+
+    try{
+      const response = await fetch('http://localhost:3000/Doc/predict',{
+        method:"POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({medical,patientId})
+      })
+      if(response.ok){
+        navigate('/Doc')
+      }
+      else {
+        alert('Something went wrong. Please try again.');
+      }
+    } 
+    catch (error) {
+      alert('An error occurred. Please try again later.');
+    }
+    }
+  
 
   return (
     <Box
@@ -178,6 +209,11 @@ export default function Predict() {
                 <Typography variant="h6">ECG Signal Plot:</Typography>
                 <img src={ecgPlot} alt="ECG Plot" style={{ width: '100%', borderRadius: '8px' }} />
               </Box>
+            )}
+            {ecgPlot && prediction && !loading && (
+              <Button variant="contained" sx={{ background: '#1565c0', color: 'white' }} onClick={handlePredictSubmit}>
+              Submit Prediction
+            </Button>
             )}
           </Box>
         </Grid>

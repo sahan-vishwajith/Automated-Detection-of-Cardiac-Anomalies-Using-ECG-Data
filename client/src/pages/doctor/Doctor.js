@@ -65,7 +65,8 @@ export default function Doctor() {
         </Link>
 
         <Link to="/dashboard"  //change here for the dashbord url
-        style={{ textDecoration: 'none' }}
+        style={{ textDecoration: 'none' }
+}
         // onClick={getDetails}>
         >
           <Cards
