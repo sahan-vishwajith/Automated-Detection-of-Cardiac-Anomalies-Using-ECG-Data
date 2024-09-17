@@ -31,7 +31,7 @@ export const editPatient = async (req, res, next) => {
 
 // Create Patient
 export const createPatient = async (req, res, next) => {
-    const doctorID = req.body.doctor;
+    const doctorID = req.user;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     try {
@@ -94,7 +94,7 @@ export const loginPatient = async (req, res, next) => {
         if (!isPasswordCorrect) 
             return next(createError(400, "Wrong password or username..."));
 
-        const token = jwt.sign({ id: patient.id }, process.env.JWT);
+        const token = jwt.sign({ id: patient.id }, process.env.JWT, {expiresIn:'1h'});
         const { password, ...otherdetails } = patient._doc;
 
         res.cookie("access_token", token, {

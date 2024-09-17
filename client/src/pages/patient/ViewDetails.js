@@ -54,7 +54,7 @@ export default function PatientCard() {
           alt="Patient Image"
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 2 }}>
-          <CardContent sx={{ flex: '1 0 auto', color: 'white' }}>
+          <CardContent sx={{ flex: '1 0 auto', color: 'black' }}>
             <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
               {patient.name}
             </Typography>

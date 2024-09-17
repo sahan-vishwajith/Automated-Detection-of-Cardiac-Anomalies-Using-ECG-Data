@@ -8,9 +8,9 @@ const router= express.Router()
 
 //create
 router.post('/', registerAdmin)
-router.post('/createD',registerDoctor)
+router.post('/createD',cookieAuth,registerDoctor)
 router.post('/login', loginAdmin)
 
-router.get('/Doctors',getAllDoctors)
+router.get('/Doctors',cookieAuth,getAllDoctors)
 
 export default router;

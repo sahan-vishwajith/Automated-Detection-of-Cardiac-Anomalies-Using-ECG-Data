@@ -12,7 +12,7 @@ export const loginAdmin = async (req,res,next)=>{
         if(!isPasswordCorrect) 
             return next(createError(404,"Wrong password or username..."))
 
-        const token = jwt.sign({id:admin.id }, process.env.JWT)
+        const token = jwt.sign({id:admin.id }, process.env.JWT, {expiresIn:'1h'})
         const {password, ...otherdetails} = admin._doc;
 
         res.cookie("access_token", token,{
