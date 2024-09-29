@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import page_image from "./doctor/photos/page_image.jpg";
 import { Link } from "react-router-dom";
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -47,19 +48,10 @@ const generateHexagons = (center, size, rows, colsPerRow) => {
   return hexagons;
 };
 
-// Function to get color based on population density
-const getColorByDensity = (density) => {
-  if (density > 1000) return '#800026'; // Dark red
-  if (density > 500) return '#BD0026'; // Red
-  if (density > 200) return '#E31A1C'; // Light red
-  if (density > 100) return '#FC4E2A'; // Orange
-  if (density > 50) return '#FD8D3C'; // Light orange
-  return '#FFEDA0'; // Light yellow
-};
-
 export default function Dashboard() {
   const [hexagons, setHexagons] = useState([]);
-  const [showDensityMap, setShowDensityMap] = useState(false); // State to toggle map type
+  const [showPieChart, setShowPieChart] = useState(false);
+  const [showBarChart, setShowBarChart] = useState(false);
 
   useEffect(() => {
     // Center of Sri Lanka
@@ -72,8 +64,30 @@ export default function Dashboard() {
     setHexagons(generatedHexagons);
   }, []);
 
-  // Generate random population density for each hexagon
-  const populationDensities = hexagons.map(() => Math.floor(Math.random() * 1200)); // Random density between 0 and 1200
+  // Sample data for sex distribution
+  const sexData = [
+    { name: 'Male', value: 500 },
+    { name: 'Female', value: 300 },
+  ];
+
+  // Sample data for age distribution
+  const ageData = [
+    { name: '0-18', value: 200 },
+    { name: '19-35', value: 300 },
+    { name: '36-50', value: 250 },
+    { name: '51+', value: 50 },
+  ];
+
+  // Sample data for heart anomalies
+  const anomalyData = [
+    { name: 'Atrial Septal Defect', value: 150 },
+    { name: 'Ventricular Septal Defect', value: 120 },
+    { name: 'Tetralogy of Fallot', value: 100 },
+    { name: 'Patent Ductus Arteriosus', value: 80 },
+    { name: 'Aortic Stenosis', value: 60 },
+    { name: 'Mitral Valve Prolapse', value: 40 },
+    { name: 'Hypertrophic Cardiomyopathy', value: 30 },
+  ];
 
   return (
     <Box
@@ -96,50 +110,120 @@ export default function Dashboard() {
           left: 16,
         }}
       >
-      <Button variant="contained" color="primary" component={Link} to='/Doc'>
+        <Button variant="contained" color="primary" component={Link} to='/Doc'>
           Back
-      </Button>
+        </Button>
       </Box>
 
       <div style={{ height: "80vh", width: "80%", margin: "0 auto" }}>
         <h1>Sri Lanka Population Density Map</h1>
+        
+        {/* Buttons for charts */}
         <Button 
           variant="contained" 
-          onClick={() => setShowDensityMap(!showDensityMap)}
+          onClick={() => setShowPieChart(!showPieChart)}
           style={{ marginBottom: "10px" }}
         >
-          {showDensityMap ? "Show Normal Map" : "Show Density Map"}
+          {showPieChart ? "Hide Pie Chart" : "Show Pie Chart"}
         </Button>
-        <MapContainer
-          center={[7.8731, 80.7718]}
-          zoom={7}
-          style={{ 
-            height: "70vh", 
-            width: "100%",
-            border: "2px solid #000",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
-          }}
+        
+        <Button 
+          variant="contained" 
+          onClick={() => setShowBarChart(!showBarChart)}
+          style={{ marginBottom: "10px" }}
         >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {showDensityMap && hexagons.map((hex, index) => (
-            <GeoJSON 
-              key={index} 
-              data={{ type: "Feature", geometry: { type: "Polygon", coordinates: [hex] } }} 
-              style={{
-                fillColor: getColorByDensity(populationDensities[index]), // Color based on random density
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.6, // Adjust transparency if needed
-              }} 
+          {showBarChart ? "Hide Bar Chart" : "Show Bar Chart"}
+        </Button>
+
+        {/* Pie Chart for Sex Distribution */}
+        {showPieChart && (
+          <PieChart width={400} height={400}>
+            <Pie
+              data={sexData}
+              cx={200}
+              cy={200}
+              labelLine={false}
+              label={entry => entry.name}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {sexData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random()*16777215).toString(16)}`} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        )}
+
+        {/* Bar Chart for Age Distribution */}
+        {showBarChart && (
+          <BarChart
+            width={500}
+            height={300}
+            data={ageData}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="value" fill="#8884d8" />
+          </BarChart>
+        )}
+
+        {/* Bar Chart for Heart Anomalies */}
+        {showBarChart && (
+          <BarChart
+            width={500}
+            height={300}
+            data={anomalyData}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="value" fill="#82ca9d" />
+          </BarChart>
+        )}
+
+        <div style={{ height: "70vh", width: "100%", marginTop: "20px" }}>
+          <MapContainer
+            center={[7.8731, 80.7718]}
+            zoom={7}
+            style={{ 
+              height: "70vh", 
+              width: "100%",
+              border: "2px solid #000",
+              borderRadius: "8px",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
+            }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-          ))}
-        </MapContainer>
+            {hexagons.map((hex, index) => (
+              <GeoJSON 
+                key={index} 
+                data={{ type: "Feature", geometry: { type: "Polygon", coordinates: [hex] } }} 
+                style={{
+                  fillColor: '#FFEDA0', // Default color
+                  weight: 1,
+                  opacity: 1,
+                  color: 'white',
+                  dashArray: '3',
+                  fillOpacity: 0.6, // Adjust transparency if needed
+                }} 
+              />
+            ))}
+          </MapContainer>
+        </div>
       </div>
     </Box>
   );
