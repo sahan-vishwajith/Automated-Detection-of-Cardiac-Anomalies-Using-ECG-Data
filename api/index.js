@@ -56,3 +56,5 @@ app.listen(3000, ()=>{
     connect()
     console.log('connected to backend')
 })
+
+export default app;
