@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Homebttn from "../../components/LogOutbttn.js.js";
+import Homebttn from "../../components/LogOutbttn.js";
 import { useNavigate } from 'react-router-dom';
 import page_image from "./photos/page_image.jpg";
 import { Link } from 'react-router-dom';

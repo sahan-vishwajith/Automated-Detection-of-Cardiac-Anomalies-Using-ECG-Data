@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Cards from '../../components/Card.js';
 import patients from "./photos/patients.jpg";
 import ecg_prediction from "./photos/ecg_predict.jpg";
-import LogOutBttn from "../../components/LogOutbttn.js.js";
+import LogOutBttn from "../../components/LogOutbttn.js";
 import page_image from "./photos/page_image.jpg"; 
 import dashbord from "./photos/dashbord.jpg"
 
