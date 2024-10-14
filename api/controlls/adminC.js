@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken"
 
+
 export const loginAdmin = async (req,res,next)=>{
     try {
         const admin =await Admin.findOne({username:req.body.username})
