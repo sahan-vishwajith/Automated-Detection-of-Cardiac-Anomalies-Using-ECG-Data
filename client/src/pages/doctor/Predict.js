@@ -81,35 +81,47 @@ export default function Predict() {
     }
   };
 
-  const handlePredictSubmit= async ()=>{
+  const handlePredictSubmit = async () => {
+    // Get the current date
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
     const day = String(currentDate.getDate()).padStart(2, '0');
 
-    const medical  = `${prediction} - (${year}.${month}.${day})`
-    const patientId = patient.id
+    // Prepare the medical info string
+    const medical = `${prediction} - (${year}.${month}.${day})`;
+    const patientId = patient.id; // Assuming patient.id exists
 
-    try{
-      const response = await fetch('http://localhost:3000/Doc/predict',{
-        method:"POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({medical,patientId})
-      })
-      if(response.ok){
-        navigate('/Doc')
-      }
-      else {
-        alert('Something went wrong. Please try again.');
-      }
+    try {
+        // Send a POST request to the server
+        const response = await fetch('http://localhost:3000/Doc/predict', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ medical, patientId }) // Body contains medical info and patient ID
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            // Optionally handle the response data if needed
+            const data = await response.json(); // Capture the response data if necessary
+            console.log('Prediction submitted successfully:', data);
+
+            // Navigate back to the doctor's page
+            navigate('/Doc');
+        } else {
+            // Handle server-side errors
+            const errorData = await response.json(); // Get error details from response
+            alert(`Error: ${errorData.message || 'Something went wrong. Please try again.'}`);
+        }
     } 
     catch (error) {
-      alert('An error occurred. Please try again later.');
+        // Handle network errors or unexpected issues
+        console.error('An error occurred:', error);
+        alert('An error occurred. Please try again later.');
     }
-    }
-  
+}
 
   return (
     <Box

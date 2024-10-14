@@ -2,6 +2,7 @@ import Patient from "../models/patient.js";
 import Doctor from "../models/doctor.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import createError from "http-errors"; // Make sure to import createError
 
 // Edit Patient
 export const editPatient = async (req, res, next) => {
@@ -106,16 +107,23 @@ export const loginPatient = async (req, res, next) => {
     }
 };
 
-export const updateMedicalHistory = async (req,res,next)=>{
-    const pid =  req.body.id
-    const newDetails = req.body.medical
-    try{
-        const patient = await Patient.findOneAndUpdate({id:pid},{ $push: { medicalHistory: newDetails } })
+export const updateMedicalHistory = async (req, res, next) => {
+    const pid = req.body.id; // Patient ID
+    const newDetails = req.body.medical; // New medical details to be added
+
+    try {
+        const patient = await Patient.findOneAndUpdate(
+            { id: pid }, 
+            { $push: { medicalHistory: newDetails } },
+            { new: true } // This option returns the modified document
+        );
+
         if (!patient) {
             return res.status(404).json({ message: "Patient not found" });
-          }
-          res.status(200).json(patient);
-        } catch (error) {
-            next(error); 
-        }    
+        }
+
+        res.status(200).json(patient);
+    } catch (error) {
+        next(error);
     }
+};
