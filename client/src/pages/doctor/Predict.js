@@ -61,7 +61,7 @@ export default function Predict() {
 
         if (response.data) {
           if (response.data.prediction) {
-            setPrediction(`Prediction: ${response.data.prediction}`);
+            setPrediction(response.data.prediction);
           } else {
             setPrediction('No predictions returned from the server.');
           }
@@ -90,7 +90,7 @@ export default function Predict() {
 
     // Prepare the medical info string
     const medical = `${prediction} - (${year}.${month}.${day})`;
-    const patientId = patient.id; // Assuming patient.id exists
+    const patientId = patient.idNumber; // Assuming patient.id exists
 
     try {
         // Send a POST request to the server
@@ -119,7 +119,7 @@ export default function Predict() {
     catch (error) {
         // Handle network errors or unexpected issues
         console.error('An error occurred:', error);
-        alert('An error occurred. Please try again later.');
+        alert(error);
     }
 }
 
@@ -146,14 +146,26 @@ export default function Predict() {
         {/* Left Side - Patient Details */}
         <Grid item xs={12} md={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-            <Card sx={{ width: '80%', maxWidth: 400, background: 'rgba(255, 255, 255, 0.8)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
+            <Card sx={{ width: '80%', maxWidth: 400, maxHeight:"90%", background: 'rgba(255, 255, 255, 0.8)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
               <CardMedia component="img" height="230" image={patientimg} alt="" />
               <CardContent>
                 <Typography variant="h5" component="div" >Patient Details</Typography>
                 <Typography variant="body1" >Name: {patient.name}</Typography>
                 <Typography variant="body1" >Birthday: {patient.bday.split('T')[0]}</Typography>
                 <Typography variant="body1" >City: {patient.address}</Typography>
-                <Typography variant="body1" >Medical History: {patient.medicalHistory}</Typography>
+                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Medical History:</Typography>
+                  <div 
+                    style={{
+                      maxHeight: '150px', // Set a max height for the scrollable area
+                      overflowY: 'auto',   // Enable vertical scrolling
+                    }}
+                  >
+                    {patient.medicalHistory.map((history, index) => (
+                      <div key={index}>{history}</div> // Display each item on a new line
+                    ))}
+                    <br></br>
+                  </div><br></br>
+
               </CardContent>
             </Card>
           </Box>
