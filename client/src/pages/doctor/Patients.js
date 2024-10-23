@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import page_image from "./photos/page_image.jpg";
@@ -42,7 +42,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Patients(props) {
   
   const [patients, setPatients] = useState([]);
-
   // Fetch the patients data when the component mounts
   useEffect(() => {
     const fetchPatients = async () => {
@@ -59,7 +58,11 @@ export default function Patients(props) {
         if (response.ok) {
           const data = await response.json();
           setPatients(data); // Store the data in the state
-        } else {
+        }
+        else if (response.status ===401){
+          alert('token expired')      
+        }
+        else {
           alert('Failed to fetch patients.');
         }
       } catch (error) {
@@ -141,7 +144,12 @@ export default function Patients(props) {
                   <StyledTableCell align="center">{patient.name}</StyledTableCell>
                   <StyledTableCell align="center">{patient.bday.split('T')[0]}</StyledTableCell>
                   <StyledTableCell align="center">{patient.gender}</StyledTableCell>
-                  <StyledTableCell align="center">{patient.medicalHistory}</StyledTableCell>
+                  {/* <StyledTableCell align="center">{patient.medicalHistory}</StyledTableCell> */}
+                  <StyledTableCell align="center" sx={{ wordWrap: 'break-word' }}>
+                    {patient.medicalHistory.map((history, index) => (
+                      <div key={index}>{history}</div> // Display each item in medical history on a new line
+                    ))}
+                </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
