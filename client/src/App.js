@@ -17,7 +17,7 @@ import PatientLogin from './pages/patient/Plogin.js';
 import PatientCard from './pages/patient/ViewDetails.js';
 import PatientEditForm from './pages/patient/EditDetails.js';
 
-import DashBoard from './pages/dashboard.js'
+import DashBoard from './pages/doctor/dashboard.js'
 
 function App() {
   return (
