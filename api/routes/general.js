@@ -9,7 +9,6 @@ const router= express.Router()
 
 router.get('/dashboard', cookieAuth, getPatientsForDashBoard)
 router.post('/logout', logOut)
-
 router.get('/predComp',getPredictionComposition)
 router.get('/docCount',getTotalDocCount)
 router.get('/patientCount', getTotalPatientCount)

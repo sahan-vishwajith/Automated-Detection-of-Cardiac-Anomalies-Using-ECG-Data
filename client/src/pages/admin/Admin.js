@@ -62,7 +62,7 @@ export default function Admin() {
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
         </Link>
-        <Link to="/dashboard"  // change here for the dashbord url
+        {/* <Link to="/dashboard"  // change here for the dashbord url
         style={{ textDecoration: 'none' }}>
           <Cards
             img={dashbord}
@@ -71,7 +71,7 @@ export default function Admin() {
             bg= "rgba(255, 255, 255, 0.8)"
             border='1px solid rgba(251, 120, 22, 0.3)'
           />
-        </Link>
+        </Link> */}
       </Box>
     </Box>
   );

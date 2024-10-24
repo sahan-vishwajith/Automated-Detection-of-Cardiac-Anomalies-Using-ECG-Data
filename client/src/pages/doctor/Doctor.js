@@ -57,14 +57,14 @@ export default function Doctor() {
         <Link to="/Doc/createP" style={{ textDecoration: 'none' }}>
           <Cards
             img={ecg_prediction}
-            title="Predict CVD"
+            title="Register Patient"
             desc="Make CVD predictions for a new Patient using ECG data."
             bg="rgba(255, 255, 255, 0.8)"
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
         </Link>
 
-        <Link to="/dashboard"  //change here for the dashbord url
+        {/* <Link to="/dashboard"  //change here for the dashbord url
         style={{ textDecoration: 'none' }
 }
         // onClick={getDetails}>
@@ -76,7 +76,7 @@ export default function Doctor() {
             bg="rgba(255, 255, 255, 0.8)"
             border= '1px solid rgba(33, 137, 228, 0.34)'
           />
-        </Link>
+        </Link> */}
       </Box>
     </Box>
   );
