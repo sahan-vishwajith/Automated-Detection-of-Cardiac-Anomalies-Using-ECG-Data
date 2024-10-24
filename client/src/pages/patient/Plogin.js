@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -48,7 +47,7 @@ export default function AdminLogin() {
       });
 
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         navigate('/Patient', {state:{patient:data}}); 
       } else {
         alert('Wrong username or password, try again'); 
@@ -71,7 +70,7 @@ export default function AdminLogin() {
     '& .MuiInputLabel-root.Mui-focused': {
       color: '#4a148c',
     },
-  }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -82,7 +81,7 @@ export default function AdminLogin() {
           backgroundSize: 'cover', // Ensure the image covers the entire area
           backgroundPosition: 'center', // Center the background image
           height: '100vh', // Full viewport height
-          position: 'relative', // To position th
+          position: 'relative',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -95,13 +94,15 @@ export default function AdminLogin() {
             left: 16,
           }}
         >
-        <Button variant="contained"  component={Link} to='/' 
+          <Button variant="contained" component={Link} to='/' 
             sx={{ backgroundColor: '#7b1fa2', color: '#fff',
                 '&:hover': {
-                backgroundColor: '#4a148c',}
-            }}>
-          Back
-        </Button>
+                  backgroundColor: '#4a148c',
+                }
+            }}
+          >
+            Back
+          </Button>
         </Box>
         <Container component="main" maxWidth="xs">
           <Box
@@ -116,8 +117,6 @@ export default function AdminLogin() {
               WebkitBackdropFilter: 'blur(5px)',
               border: '1px solid rgba(167, 29, 239, 0.3)', 
               padding: 3,
-              borderRadius: 2,
-              boxShadow: 3,
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -155,7 +154,6 @@ export default function AdminLogin() {
               />
               <Button
                 type="submit"
-
                 fullWidth
                 variant="contained"
                 sx={{

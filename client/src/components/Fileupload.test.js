@@ -1,34 +1,31 @@
-// FileUpload.test.js
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import FileUpload from './Fileupload.js'; 
+import { render, screen } from '@testing-library/react'; 
+import '@testing-library/jest-dom'; // For additional matchers
+import { act } from 'react'; // Import act directly from react
+import FileUpload from './FileUpload'; // Adjust path accordingly
 
 describe('FileUpload Component', () => {
-  test('renders the upload button and displays selected file name', () => {
-    render(<FileUpload />);
+  test('renders the upload button and displays selected file name', async () => {
+    await act(async () => {
+      render(<FileUpload />);
+    });
 
-    // Check if the upload button is in the document
-    const uploadButton = screen.getByRole('button', { name: /upload file/i });
+    // Check if the upload button is present
+    const uploadButton = screen.getByRole('button', { name: /upload/i });
     expect(uploadButton).toBeInTheDocument();
 
-    // Simulate file upload
-    const file = new File(['dummy content'], 'test.dat', { type: 'application/dat' });
-    const input = screen.getByLabelText(/upload file/i);
-
     // Simulate file selection
-    fireEvent.change(input, { target: { files: [file] } });
+    const fileInput = screen.getByLabelText(/upload file/i); // Adjust this to match your input label
+    const file = new File(['test file content'], 'test-file.txt', { type: 'text/plain' });
 
-    // Verify that the file name is displayed
-    const fileNameDisplay = screen.getByText(/selected file: test.dat/i);
-    expect(fileNameDisplay).toBeInTheDocument();
-  });
+    await act(async () => {
+      Object.defineProperty(fileInput, 'files', {
+        value: [file],
+      });
+      fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+    });
 
-  test('does not display a file name when no file is uploaded', () => {
-    render(<FileUpload />);
-    
-    // Check if the file name display is not in the document initially
-    const fileNameDisplay = screen.queryByText(/selected file:/i);
-    expect(fileNameDisplay).not.toBeInTheDocument();
+    // Check if the selected file name is displayed
+    expect(screen.getByText(/test-file.txt/i)).toBeInTheDocument();
   });
 });

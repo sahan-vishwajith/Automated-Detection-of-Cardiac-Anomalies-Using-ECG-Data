@@ -1,6 +1,6 @@
-// src/components/Cards.test.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Import this to access additional matchers
 import Cards from './Card.js'; // Adjust the import path if necessary
 
 describe('Cards Component', () => {
@@ -26,7 +26,7 @@ describe('Cards Component', () => {
     // Check if the image is rendered with the correct src
     const imgElement = screen.getByRole('img');
     expect(imgElement).toHaveAttribute('src', mockProps.img);
-    
+
     // Check if the card has the correct background color
     expect(imgElement.closest('div')).toHaveStyle(`background: ${mockProps.bg}`);
     expect(imgElement.closest('div')).toHaveStyle(`border: ${mockProps.border}`);

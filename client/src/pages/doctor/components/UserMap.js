@@ -1,16 +1,14 @@
-// src/pages/dashboard.js
 import React from 'react';
 import { MapContainer, TileLayer, GeoJSON, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import geoJsonData from './lk.json';
 
-// Sample user locations (latitude, longitude)
-const userLocations = [
-  { id: 1, name: 'User 1', position: [8.0, 81.0] },
-  { id: 2, name: 'User 2', position: [8.1, 81.1] },
-  { id: 3, name: 'User 3', position: [8.2, 81.2] },
-];
+// const userLocations = [
+//   { id: 1, name: 'User 1', position: [8.0, 81.0] },
+//   { id: 2, name: 'User 2', position: [8.1, 81.1] },
+//   { id: 3, name: 'User 3', position: [8.2, 81.2] },
+// ];
 
 // Function to determine color based on the name property
 const getColor = (feature) => {
@@ -22,11 +20,11 @@ const getColor = (feature) => {
     case 'Yet Another Name':
       return '#3357FF'; // Color for yet another name
     default:
-      return '#8B948E'; // Default color
+      return '#999'; // Default color
   }
 };
 
-const Dashboard = () => {
+const UserMap = () => {
   // Fix default icon issue for Leaflet
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
@@ -35,8 +33,21 @@ const Dashboard = () => {
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
   });
 
+  // Inline styles for the component
+  const styles = {
+    mapContainer: {
+      height: '400px', // Set height
+      width: '100%', // Full width
+      maxWidth: '800px', // Optional: set a maximum width
+      margin: '0 auto', // Center the map horizontally
+      borderRadius: '8px',
+      overflow: 'hidden',
+      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+    },
+  };
+
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={styles.mapContainer}>
       <MapContainer center={[8.0, 81.0]} zoom={7} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -46,14 +57,14 @@ const Dashboard = () => {
           data={geoJsonData} 
           style={(feature) => ({
             color: getColor(feature), // Set border color based on feature name
-            weight: 2,
-            fillOpacity: 0.5,
+            weight: 1,
+            fillOpacity: 0.3,
             fillColor: getColor(feature), // Set fill color based on feature name
           })} 
         />
         
         {/* Add CircleMarkers for each user location */}
-        {userLocations.map(user => (
+        {/* {userLocations.map(user => (
           <CircleMarker 
             key={user.id} 
             center={user.position} 
@@ -64,10 +75,10 @@ const Dashboard = () => {
           >
             <Popup>{user.name}</Popup>
           </CircleMarker>
-        ))}
+        ))} */}
       </MapContainer>
     </div>
   );
 };
 
-export default Dashboard;
+export default UserMap;

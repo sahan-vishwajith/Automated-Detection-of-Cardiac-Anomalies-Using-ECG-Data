@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Container, Typography, TextField, Button, Grid, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
-import page_image from "./photos/page_image.jpg";
+import page_image from './photos/page_image.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -9,8 +9,8 @@ import { yellow } from '@mui/material/colors';
 import { FormControl, InputLabel, Select } from '@mui/material';
 
 export default function PatientEditForm() {
-    const location = useLocation();
-    const { patient } = location.state || {};
+  const location = useLocation();
+  const { patient } = location.state || { patient: {} }; // Provide default empty object for safety
 
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
@@ -22,36 +22,39 @@ export default function PatientEditForm() {
   });
 
   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormValues({
+    const { name, value } = event.target;
+    setFormValues({
       ...formValues,
       [name]: value,
-      });
+    });
   };
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-          const response = await fetch('http://localhost:3000/Patient/edit', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formValues),
-          credentials: 'include',
-          });
-          console.log(response)
-          if (response.ok) {
-            const data = await response.json()
-            navigate('/Patient',{state:{patient:data}}); 
-          } else {
-            alert('Something went wrong. Please try again.'); 
-          }
-      } catch (error) {
-          alert('An error occurred. Please try again later.'); 
+    event.preventDefault();
+    setIsLoading(true); // Set loading to true when form is being submitted
+    try {
+      const response = await fetch('http://localhost:3000/Patient/edit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        navigate('/Patient', { state: { patient: data } });
+      } else {
+        alert('Something went wrong. Please try again.');
       }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false); // Turn off loading after submission
+    }
   };
-  const design = {
+
+  const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused': {
         borderColor: '#4a148c',
@@ -64,13 +67,14 @@ export default function PatientEditForm() {
     '& .MuiInputLabel-root.Mui-focused': {
       color: '#4a148c',
     },
-  }
+  };
+
   return (
     <Box
       sx={{
-        backgroundImage: `url(${page_image})`, // Set the background image
-        backgroundSize: 'cover', // Ensure the image covers the entire area
-        backgroundPosition: 'center', // Center the background image
+        backgroundImage: `url(${page_image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
@@ -80,55 +84,60 @@ export default function PatientEditForm() {
       }}
     >
       <Box
+        sx={{
+          position: 'absolute',
+          top: 16,
+          left: 16,
+        }}
+      >
+        <Button
+          variant="contained"
+          component={Link}
+          to="/Patient"
+          state={{ patient }}
           sx={{
-            position: 'absolute',
-            top: 16,
-            left: 16,
+            backgroundColor: '#7b1fa2',
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#4a148c',
+            },
           }}
         >
-          <Button variant="contained"  component={Link} to='/Patient'
-        state={{patient}}
-          sx={{ backgroundColor: '#7b1fa2', color: '#fff',
-            '&:hover': {
-            backgroundColor: '#4a148c',}
-        }}>
           Back
         </Button>
-        </Box>
-      <Container 
-        component="main" 
-        maxWidth={false} 
-        sx={{ 
-          width: '80%', 
-          height: '80vh', // Set the container height to 80% of the page height
+      </Box>
+      <Container
+        component="main"
+        maxWidth={false}
+        sx={{
+          width: '80%',
+          height: '80vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-        }} 
+        }}
       >
         <Box
           sx={{
             width: '100%',
-            height: '100%', // Make the box fill the container
+            height: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            background: "rgba(255, 255, 255, 0.8)", 
+            background: 'rgba(255, 255, 255, 0.8)',
             borderRadius: '16px',
             boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
             backdropFilter: 'blur(5px)',
             WebkitBackdropFilter: 'blur(5px)',
             border: '1px solid rgba(167, 29, 239, 0.3)',
             padding: 4,
-            borderRadius: 2,
-            boxShadow: 3,
-            overflowY: 'auto', // Enable scrolling if content overflows
+            overflowY: 'auto',
           }}
         >
-          <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
-            Edit Your Detials
+          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+            Edit Your Details
           </Typography>
-          <Box component="form" sx={{ width: '100%' }} onSubmit={handleSubmit} >
+          <Box component="form" sx={{ width: '100%' }} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -137,11 +146,9 @@ export default function PatientEditForm() {
                   id="name"
                   label="Name"
                   name="name"
-                  autoComplete="name"
-                  margin="normal"
                   value={formValues.name}
                   onChange={handleChange}
-                  sx={design}
+                  sx={textFieldStyles}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -151,13 +158,11 @@ export default function PatientEditForm() {
                   id="idNumber"
                   label="ID Number"
                   name="idNumber"
-                  autoComplete="idNumber"
-                  margin="normal"
-                  value= {patient.idNumber}
+                  value={patient.idNumber || ''}
                   InputProps={{
                     readOnly: true,
                   }}
-                  sx={design}
+                  sx={textFieldStyles}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -167,11 +172,9 @@ export default function PatientEditForm() {
                   id="address"
                   label="Address"
                   name="address"
-                  autoComplete="address"
-                  margin="normal"
                   value={formValues.address}
                   onChange={handleChange}
-                  sx={design}
+                  sx={textFieldStyles}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -228,14 +231,11 @@ export default function PatientEditForm() {
                   id="bday"
                   label="Birthday"
                   name="bday"
-                  autoComplete="bday"
-                  InputLabelProps={{ shrink: true }}
-                  margin="normal"
-                  value={patient.bday.split('T')[0]}
+                  value={patient.bday?.split('T')[0] || ''}
                   InputProps={{
                     readOnly: true,
                   }}
-                  sx={design}
+                  sx={textFieldStyles}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -246,12 +246,11 @@ export default function PatientEditForm() {
                   id="gender"
                   label="Gender"
                   name="gender"
-                  margin="normal"
-                  value={patient.gender}
+                  value={patient.gender || ''}
                   InputProps={{
                     readOnly: true,
                   }}
-                  sx={design}
+                  sx={textFieldStyles}
                 >
                   <MenuItem value="Male">Male</MenuItem>
                   <MenuItem value="Female">Female</MenuItem>
@@ -265,8 +264,6 @@ export default function PatientEditForm() {
                   label="Email"
                   name="email"
                   type="email"
-                  autoComplete="email"
-                  margin="normal"
                   value={formValues.email}
                   onChange={handleChange}
                   sx={design}
@@ -296,12 +293,11 @@ export default function PatientEditForm() {
                   name="medicalHistory"
                   multiline
                   rows={4}
-                  margin="normal"
-                  value={patient.medicalHistory}
+                  value={patient.medicalHistory || ''}
                   InputProps={{
                     readOnly: true,
                   }}
-                  sx={design}
+                  sx={textFieldStyles}
                 />
               </Grid>
               
@@ -310,12 +306,16 @@ export default function PatientEditForm() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ backgroundColor: '#7b1fa2', color: '#fff',
+              disabled={isLoading}
+              sx={{
+                backgroundColor: '#7b1fa2',
+                color: '#fff',
                 '&:hover': {
-                backgroundColor: '#4a148c',}
-            }}
+                  backgroundColor: '#4a148c',
+                },
+              }}
             >
-              Submit
+              {isLoading ? 'Submitting...' : 'Submit'}
             </Button>
           </Box>
         </Box>
@@ -323,3 +323,18 @@ export default function PatientEditForm() {
     </Box>
   );
 }
+
+// Add PropTypes for patient object validation
+PatientEditForm.propTypes = {
+  patient: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    idNumber: PropTypes.string.isRequired,
+    bday: PropTypes.string.isRequired,
+    gender: PropTypes.string.isRequired,
+    medicalHistory: PropTypes.string.isRequired,
+    doctor: PropTypes.string.isRequired,
+  }),
+};
