@@ -1,7 +1,8 @@
 import express from "express"
 import { loginDoctor, registerDoctor } from "../controlls/doctorC.js"
 import cookieAuth from "../utils/verifyJwt.js"
-import { createPatient, getAllPatients, updateMedicalHistory } from "../controlls/patientC.js"
+import { createPatient, getAllPatients } from "../controlls/patientC.js"
+import { processPredictions } from "../controlls/utilC.js"
 
 const router= express.Router()
 
@@ -10,6 +11,6 @@ const router= express.Router()
 router.post('/login',loginDoctor)
 router.post('/createP',cookieAuth, createPatient)
 
-router.post('/predict',updateMedicalHistory)
+router.post('/predict',processPredictions)
 router.get('/patients', cookieAuth , getAllPatients)
 export default router;

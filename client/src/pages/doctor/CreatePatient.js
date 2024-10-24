@@ -3,6 +3,7 @@ import { Box, Container, Typography, TextField, Button, Grid, MenuItem } from '@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import page_image from "./photos/page_image.jpg";
+import { FormControl, InputLabel, Select } from '@mui/material';
 
 export default function PatientForm() {
   const navigate = useNavigate();
@@ -17,8 +18,9 @@ export default function PatientForm() {
     doctor: '',
     password: '',
     username: '',
-    latitude: '',  // Added for latitude
-    longitude: ''  // Added for longitude
+    district:'',
+    // latitude: '',  
+    // longitude: ''  
   });
 
   const handleChange = (event) => {
@@ -150,6 +152,54 @@ export default function PatientForm() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel id="district-label">District</InputLabel>
+                  <Select
+                    required
+                    labelId="district-label"
+                    id="district"
+                    name="district"
+                    value={formValues.district} // Ensure this state holds the selected district
+                    onChange={handleChange}
+                    autoComplete="district"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {[
+                    "Ampara",
+                      "Anuradhapura",
+                      "Badulla",
+                      "Batticaloa",
+                      "Colombo",
+                      "Galle",
+                      "Gampaha",
+                      "Hambantota",
+                      "Jaffna",
+                      "Kalutara",
+                      "Kandy",
+                      "Kegalle",
+                      "Kilinochchi",
+                      "Mannar",
+                      "Matale",
+                      "Matara",
+                      "Monaragala",
+                      "Nuwara Eliya",
+                      "Polonnaruwa",
+                      "Puttalam",
+                      "Ratnapura",
+                      "Trincomalee",
+                      "Vavuniya"
+                    ].map((district) => (
+                      <MenuItem key={district} value={district}>
+                        {district.toUpperCase()} {/* Convert district names to uppercase */}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -180,7 +230,7 @@ export default function PatientForm() {
                   <MenuItem value="Female">Female</MenuItem>
                 </TextField>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   fullWidth
                   required
@@ -247,33 +297,8 @@ export default function PatientForm() {
                   onChange={handleChange}
                 />
               </Grid>
-              {/* New Fields for Latitude and Longitude */}
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="latitude"
-                  label="Latitude"
-                  name="latitude"
-                  autoComplete="latitude"
-                  margin="normal"
-                  value={formValues.latitude}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="longitude"
-                  label="Longitude"
-                  name="longitude"
-                  autoComplete="longitude"
-                  margin="normal"
-                  value={formValues.longitude}
-                  onChange={handleChange}
-                />
-              </Grid>
+              
+              
             </Grid>
             <Button
               type="submit"

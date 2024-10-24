@@ -5,7 +5,8 @@ import page_image from './photos/page_image.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { yellow } from '@mui/material/colors';
+import { FormControl, InputLabel, Select } from '@mui/material';
 
 export default function PatientEditForm() {
   const location = useLocation();
@@ -13,13 +14,12 @@ export default function PatientEditForm() {
 
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-    name: patient.name || '',
-    address: patient.address || '',
-    email: patient.email || '',
-    username: patient.username || '',
+      name: patient.name,
+      address: patient.address,
+      email: patient.email,
+      username:patient.username,
+      district: patient.district
   });
-
-  const [isLoading, setIsLoading] = useState(false); // Loading state for the submit button
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,8 +30,7 @@ export default function PatientEditForm() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true); // Set loading to true when form is being submitted
+    event.preventDefault(); // Set loading to true when form is being submitted
     try {
       const response = await fetch('http://localhost:3000/Patient/edit', {
         method: 'POST',
@@ -49,9 +48,7 @@ export default function PatientEditForm() {
       }
     } catch (error) {
       alert('An error occurred. Please try again later.');
-    } finally {
-      setIsLoading(false); // Turn off loading after submission
-    }
+    } 
   };
 
   const textFieldStyles = {
@@ -178,6 +175,53 @@ export default function PatientEditForm() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+              <FormControl fullWidth margin="normal">
+                  <InputLabel id="district-label">District</InputLabel>
+                  <Select
+                    required
+                    labelId="district-label"
+                    id="district"
+                    name="district"
+                    value={formValues.district ||''} 
+                    onChange={handleChange}
+                    autoComplete="district"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {[
+                    "Ampara",
+                      "Anuradhapura",
+                      "Badulla",
+                      "Batticaloa",
+                      "Colombo",
+                      "Galle",
+                      "Gampaha",
+                      "Hambantota",
+                      "Jaffna",
+                      "Kalutara",
+                      "Kandy",
+                      "Kegalle",
+                      "Kilinochchi",
+                      "Mannar",
+                      "Matale",
+                      "Matara",
+                      "Monaragala",
+                      "Nuwara Eliya",
+                      "Polonnaruwa",
+                      "Puttalam",
+                      "Ratnapura",
+                      "Trincomalee",
+                      "Vavuniya"
+                    ].map((district) => (
+                      <MenuItem key={district} value={district}>
+                        {district.toUpperCase()} {/* Convert district names to uppercase */}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -219,7 +263,21 @@ export default function PatientEditForm() {
                   type="email"
                   value={formValues.email}
                   onChange={handleChange}
-                  sx={textFieldStyles}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="doctor"
+                  label="Doctor"
+                  name="doctor"
+                  autoComplete="doctor"
+                  margin="normal"
+                  value={patient.doctor}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -237,26 +295,12 @@ export default function PatientEditForm() {
                   sx={textFieldStyles}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="doctor"
-                  label="Doctor"
-                  name="doctor"
-                  value={patient.doctor || ''}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  sx={textFieldStyles}
-                />
-              </Grid>
+              
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              disabled={isLoading}
               sx={{
                 backgroundColor: '#7b1fa2',
                 color: '#fff',
@@ -265,7 +309,6 @@ export default function PatientEditForm() {
                 },
               }}
             >
-              {isLoading ? 'Submitting...' : 'Submit'}
             </Button>
           </Box>
         </Box>
@@ -274,17 +317,4 @@ export default function PatientEditForm() {
   );
 }
 
-// Add PropTypes for patient object validation
-PatientEditForm.propTypes = {
-  patient: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    idNumber: PropTypes.string.isRequired,
-    bday: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    medicalHistory: PropTypes.string.isRequired,
-    doctor: PropTypes.string.isRequired,
-  }),
-};
+
