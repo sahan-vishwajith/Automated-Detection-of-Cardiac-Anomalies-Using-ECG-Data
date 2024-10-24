@@ -40,7 +40,7 @@ export default function Landing() {
         },
         statsCard: {
           flex: '1 1 200px', // Flexible basis with a minimum size
-          margin: '0px',
+          margin: '5px',
           maxWidth: '200px',
           minWidth: '150px', // Minimum width for smaller screens
         },
@@ -111,7 +111,7 @@ export default function Landing() {
                                 borderRadius: '8px',
                                 padding:'0px',
                                 marginLeft:'6px',
-                                marginTop:'45px',
+                                marginTop:'30px',
 
                                 }}>
                                 <UsersOverview />
