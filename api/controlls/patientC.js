@@ -7,7 +7,7 @@ import createError from "http-errors"; // Make sure to import createError
 // Edit Patient
 export const editPatient = async (req, res, next) => {
     try {
-        const { username, name, email, address, coords } = req.body;
+        const { username, name, email, address, district } = req.body;
         const patient = await Patient.findOne({ username });
 
         if (!patient) {
@@ -18,9 +18,8 @@ export const editPatient = async (req, res, next) => {
         patient.name = name;
         patient.email = email;
         patient.address = address;
-        if (coords) {
-            patient.coords = coords; // Update coords if provided
-        }
+        patient.district = district;
+
 
         const savedPatient = await patient.save();
         return res.status(200).json(savedPatient);
@@ -52,7 +51,7 @@ export const createPatient = async (req, res, next) => {
             password: hash,
             medicalHistory: req.body.medicalHistory,
             doctor: req.body.doctor,
-            coords: req.body.coords, // Save coords during patient creation
+            district: req.body.district, // Save district during patient creation
         });
 
         const savedPatient = await newPatient.save();
@@ -78,7 +77,7 @@ export const getAllPatients = async (req, res, next) => {
 // Get Patients for Dashboard
 export const getPatientsForDashBoard = async (req, res, next) => {
     try {
-        const patients = await Patient.find().select('location coords name bday gender doctor id');
+        const patients = await Patient.find().select('location district name bday gender doctor id');
         return res.status(200).json(patients);
     } catch (error) {
         return res.status(500).json({ message: "An error occurred", error });

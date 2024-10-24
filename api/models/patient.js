@@ -43,8 +43,8 @@ const PatientSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    location: {
-        type: [String],
+    district: {
+        type: String,
     },
     coords: {
         type: [Number], // Array of numbers to store latitude and longitude
