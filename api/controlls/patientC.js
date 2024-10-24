@@ -108,12 +108,14 @@ export const loginPatient = async (req, res, next) => {
 };
 
 export const updateMedicalHistory = async (req, res, next) => {
-    const pid = req.body.id; // Patient ID
+    const pid = req.body.patientId; // Patient ID
     const newDetails = req.body.medical; // New medical details to be added
 
+    console.log(pid)
+    console.log(newDetails)
     try {
         const patient = await Patient.findOneAndUpdate(
-            { id: pid }, 
+            { idNumber: pid }, 
             { $push: { medicalHistory: newDetails } },
             { new: true } // This option returns the modified document
         );
