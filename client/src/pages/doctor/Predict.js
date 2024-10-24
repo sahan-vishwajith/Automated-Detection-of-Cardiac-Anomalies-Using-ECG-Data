@@ -89,8 +89,9 @@ export default function Predict() {
     const day = String(currentDate.getDate()).padStart(2, '0');
 
     // Prepare the medical info string
-    const medical = `${prediction} - (${year}.${month}.${day})`;
+    const medical = `${prediction}`;
     const patientId = patient.idNumber; // Assuming patient.id exists
+    const date = `${year}.${month}.${day}`;
 
     try {
         // Send a POST request to the server
@@ -99,7 +100,7 @@ export default function Predict() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ medical, patientId }) // Body contains medical info and patient ID
+            body: JSON.stringify({ medical, patientId,date }) // Body contains medical info and patient ID
         });
 
         // Check if the response is successful

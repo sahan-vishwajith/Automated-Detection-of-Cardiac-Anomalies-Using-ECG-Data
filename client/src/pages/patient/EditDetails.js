@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { yellow } from '@mui/material/colors';
+import { FormControl, InputLabel, Select } from '@mui/material';
 
 export default function PatientEditForm() {
     const location = useLocation();
@@ -17,7 +18,7 @@ export default function PatientEditForm() {
       address: patient.address,
       email: patient.email,
       username:patient.username,
-      
+      district: patient.district
   });
 
   const handleChange = (event) => {
@@ -174,6 +175,53 @@ export default function PatientEditForm() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+              <FormControl fullWidth margin="normal">
+                  <InputLabel id="district-label">District</InputLabel>
+                  <Select
+                    required
+                    labelId="district-label"
+                    id="district"
+                    name="district"
+                    value={formValues.district ||''} 
+                    onChange={handleChange}
+                    autoComplete="district"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {[
+                    "Ampara",
+                      "Anuradhapura",
+                      "Badulla",
+                      "Batticaloa",
+                      "Colombo",
+                      "Galle",
+                      "Gampaha",
+                      "Hambantota",
+                      "Jaffna",
+                      "Kalutara",
+                      "Kandy",
+                      "Kegalle",
+                      "Kilinochchi",
+                      "Mannar",
+                      "Matale",
+                      "Matara",
+                      "Monaragala",
+                      "Nuwara Eliya",
+                      "Polonnaruwa",
+                      "Puttalam",
+                      "Ratnapura",
+                      "Trincomalee",
+                      "Vavuniya"
+                    ].map((district) => (
+                      <MenuItem key={district} value={district}>
+                        {district.toUpperCase()} {/* Convert district names to uppercase */}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -224,6 +272,22 @@ export default function PatientEditForm() {
                   sx={design}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="doctor"
+                  label="Doctor"
+                  name="doctor"
+                  autoComplete="doctor"
+                  margin="normal"
+                  value={patient.doctor}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  sx={design}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
@@ -240,22 +304,7 @@ export default function PatientEditForm() {
                   sx={design}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="doctor"
-                  label="Doctor"
-                  name="doctor"
-                  autoComplete="doctor"
-                  margin="normal"
-                  value={patient.doctor}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  sx={design}
-                />
-              </Grid>
+              
             </Grid>
             <Button
               type="submit"
