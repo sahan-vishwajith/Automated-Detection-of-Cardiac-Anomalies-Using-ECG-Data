@@ -30,8 +30,7 @@ export default function PatientEditForm() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true); // Set loading to true when form is being submitted
+    event.preventDefault(); // Set loading to true when form is being submitted
     try {
       const response = await fetch('http://localhost:3000/Patient/edit', {
         method: 'POST',
@@ -49,9 +48,7 @@ export default function PatientEditForm() {
       }
     } catch (error) {
       alert('An error occurred. Please try again later.');
-    } finally {
-      setIsLoading(false); // Turn off loading after submission
-    }
+    } 
   };
 
   const textFieldStyles = {
@@ -266,7 +263,6 @@ export default function PatientEditForm() {
                   type="email"
                   value={formValues.email}
                   onChange={handleChange}
-                  sx={design}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -282,7 +278,6 @@ export default function PatientEditForm() {
                   InputProps={{
                     readOnly: true,
                   }}
-                  sx={design}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -306,7 +301,6 @@ export default function PatientEditForm() {
               type="submit"
               fullWidth
               variant="contained"
-              disabled={isLoading}
               sx={{
                 backgroundColor: '#7b1fa2',
                 color: '#fff',
@@ -315,7 +309,6 @@ export default function PatientEditForm() {
                 },
               }}
             >
-              {isLoading ? 'Submitting...' : 'Submit'}
             </Button>
           </Box>
         </Box>
@@ -324,17 +317,4 @@ export default function PatientEditForm() {
   );
 }
 
-// Add PropTypes for patient object validation
-PatientEditForm.propTypes = {
-  patient: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    idNumber: PropTypes.string.isRequired,
-    bday: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    medicalHistory: PropTypes.string.isRequired,
-    doctor: PropTypes.string.isRequired,
-  }),
-};
+

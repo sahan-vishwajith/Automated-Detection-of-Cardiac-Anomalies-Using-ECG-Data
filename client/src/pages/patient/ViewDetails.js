@@ -76,7 +76,18 @@ export default function PatientCard() {
               </Typography>
               {patient.medicalHistory && patient.medicalHistory.length > 0 && (
                 <Typography variant="body1" gutterBottom>
-                  <strong>Medical History:</strong> {patient.medicalHistory.join(', ')}
+                  {/* <strong>Medical History:</strong> {patient.medicalHistory.join(', ')} */}
+                  <div 
+                    style={{
+                      maxHeight: '92px', // Set a max height for the scrollable area
+                      overflowY: 'auto',   // Enable vertical scrolling
+                    }}
+                  >
+                    {patient.medicalHistory.map((history, index) => (
+                      <div key={index}>{history}</div> // Display each item on a new line
+                    ))}
+                    <br></br>
+                  </div>
                 </Typography>
               )}
             </Box>
@@ -89,6 +100,7 @@ export default function PatientCard() {
             }}>
             Edit Details
           </Button>
+          <br></br>
         </Box>
       </Card>
     </Box>
