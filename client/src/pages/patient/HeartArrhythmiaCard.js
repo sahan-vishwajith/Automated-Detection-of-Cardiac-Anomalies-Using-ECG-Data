@@ -6,7 +6,7 @@ import ECGGraph from './ECGGraph'; // Import the ECGGraph component
 const heartImages = {
   Normal: "path/to/normal-heart.png",
   "Left bundle branch block": LBBB,
-  "Right bundle branch block": "path/to/right-bundle-branch-block.png",
+  "Right bundle branch block": LBBB,
   "Atrial premature": "path/to/atrial-premature.png",
   "Premature ventricular contraction": "path/to/premature-ventricular-contraction.png",
   "Ventricular escape": "path/to/ventricular-escape.png",
@@ -17,7 +17,7 @@ const heartImages = {
 const heartDescriptions = {
   Normal: "This is a healthy heart with a normal rhythm.",
   "Left bundle branch block": "The left bundle branch block (LBBB) is a cardiac condition where the electrical signals that typically travel through the left bundle branch of the heart are delayed or obstructed. This disruption affects how the heart's left ventricle contracts, often resulting in an uncoordinated heartbeat between the left and right sides of the heart.",
-  "Right bundle branch block": "A condition that delays electrical impulses in the right side of the heart.",
+  "Right bundle branch block": "Right Bundle Branch Block (RBBB) is a condition in which there is a delay or obstruction along the pathway that electrical impulses travel to make the right ventricle of the heart contract. In a healthy heart, electrical signals travel rapidly along the right and left bundle branches, which are part of the heart's conduction system. With RBBB, the right ventricle receives delayed signals, causing it to contract later than the left ventricle.",
   "Atrial premature": "Atrial premature beats are early heartbeats originating in the atria.",
   "Premature ventricular contraction": "Premature ventricular contractions are extra heartbeats that begin in the ventricles.",
   "Ventricular escape": "Ventricular escape rhythm is a backup mechanism when the upper heart rhythms fail.",

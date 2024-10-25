@@ -217,8 +217,9 @@ def plot_ecg_signal(X_test, times):
 
     # Encode the image in base64
     img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+    print(X_test[0, :, 0, 0])
     return f"data:image/png;base64,{img_base64}"
-
+    
 if __name__ == '__main__':
     app.run(debug=True)
 
