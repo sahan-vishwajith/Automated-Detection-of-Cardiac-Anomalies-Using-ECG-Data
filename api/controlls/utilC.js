@@ -112,3 +112,25 @@ export const getGenderComposition = async(req,res,next)=>{
     next(error);
   }
 }
+
+export const getDistrictComposition = async (req,res,next)=>{
+  try {
+    const districtData = await Patient.aggregate([
+      {
+        $group: {
+          _id: "$district",       
+          count: { $sum: 1 }        
+        }
+      }
+    ]);
+
+    // Convert the aggregation result into an object where district names are keys
+    const districtComposition = districtData.reduce((acc, item) => {
+      acc[item._id] = item.count;
+      return acc;
+    }, {});
+    res.status(200).json(districtComposition);
+  } catch (error) {
+    next(error); 
+  }
+}

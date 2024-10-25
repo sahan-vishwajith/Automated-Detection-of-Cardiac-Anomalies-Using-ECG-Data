@@ -23,6 +23,7 @@ export default function Landing() {
   const [patientCount, setPatientCount] = useState(null);
   const [predictComp, setPredictComp] = useState(null);
   const [genderCount, setGenderComp]= useState(null)
+  const [districtComp, setDistrictComp]= useState(null)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -48,14 +49,19 @@ export default function Landing() {
       const fetchGenderComp = async () => {
         const response = await fetch('http://localhost:3000/genderCount');
         const data = await response.json();
-        console.log(data)
         setGenderComp(data.composition);
+      };
+
+      const fetchDistrictComp = async () => {
+        const response = await fetch('http://localhost:3000/districtComp');
+        const data = await response.json();
+        setGenderComp(data);
       };
 
     // Call each function and set loading to false when all are done
     const fetchAllData = async () => {
       try {
-        await Promise.all([fetchDocCount(), fetchPatientCount(), fetchPredictComp(), fetchGenderComp()]);
+        await Promise.all([fetchDocCount(), fetchPatientCount(), fetchPredictComp(), fetchGenderComp(), fetchDistrictComp()]);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -125,19 +131,6 @@ export default function Landing() {
         return <p>Loading data...</p>; // Display loading message or spinner if data is still loading
       }
     return (
-        // <div 
-        // style={{
-        //     backgroundImage: `url(${page_image})`,
-        //     backgroundSize: 'cover',
-        //     backgroundPosition: 'center',
-        //     backgroundRepeat: 'no-repeat',
-        //     height: '100vh', 
-        //     display: 'flex', 
-        //     flexDirection: 'row', 
-        // }}
-        // >
-        //     <Navbar />
-         
         <div style={styles.dashboard}>
             <Navbar />
             <WelcomeCard />
