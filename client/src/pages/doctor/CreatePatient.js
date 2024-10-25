@@ -74,7 +74,7 @@ export default function PatientForm() {
       }}
     >
       <Box sx={{ position: 'absolute', top: 16, left: 16 }}>
-        <Button variant="contained" color="primary" component={Link} to='/Doc'>
+        <Button variant="contained" color="primary" component={Link} to='/Doc/patients'>
           Back
         </Button>
       </Box>

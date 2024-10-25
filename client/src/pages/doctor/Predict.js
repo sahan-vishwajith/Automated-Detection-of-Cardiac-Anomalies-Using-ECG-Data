@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import patientimg from './photos/patients.jpg';
+import patientimg from './photos/handsome-confident-smiling-man-with-hands-crossed-chest.jpg';
 import page_image from "./photos/page_image.jpg";
 import axios from 'axios'; 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -147,16 +147,30 @@ export default function Predict() {
         {/* Left Side - Patient Details */}
         <Grid item xs={12} md={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-            <Card sx={{ width: '80%', maxWidth: 400, maxHeight:"90%", background: 'rgba(255, 255, 255, 0.8)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
-              <CardMedia component="img" height="230" image={patientimg} alt="" />
-              <CardContent>
-                <Typography variant="h5" component="div" >Patient Details</Typography>
-                <Typography variant="body1" >Name: {patient.name}</Typography>
-                <Typography variant="body1" >Birthday: {patient.bday.split('T')[0]}</Typography>
-                <Typography variant="body1" >City: {patient.address}</Typography>
-                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Medical History:</Typography>
+            <Card sx={{ height:"600px",width: '80%', maxWidth: 400, maxHeight:"90%", background: 'rgba(255, 255, 255, 0.8)', borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(5px)', border: '1px solid rgba(33, 137, 228, 0.34)' }}>
+            <CardMedia
+  component="img"
+  height="230"
+  image={patientimg}
+  alt="Patient"
+  sx={{
+    width: 150,       // Set a fixed width for the image
+    height: 150,      // Set a fixed height for the image
+    borderRadius: '50%', // Make it a circle
+    objectFit: 'cover',  // Ensures the image covers the circular frame without distortion
+    border: '3px solid #1565c0',
+    margin:"auto",
+    marginTop:"20px", // Optional: adds a colored border around the image
+  }}
+/>              <CardContent sx={{padding:"50px"}}>
+                <Typography variant="h4" component="div" sx={{marginBottom:"20px", textAlign:"center"}}>Patient Details</Typography>
+                <Typography variant="body1" sx={{ fontSize: '1.3rem', padding:"10px"}} >Name: {patient.name}</Typography>
+                <Typography variant="body1" sx={{ fontSize: '1.3rem', padding:"10px"}}>Birthday: {patient.bday.split('T')[0]}</Typography>
+                <Typography variant="body1" sx={{ fontSize: '1.3rem', padding:"10px"}}>City: {patient.address}</Typography>
+                <Typography variant="body1" sx={{ fontSize: '1.3rem', padding:"10px",fontWeight: 'bold' }}>Medical History:</Typography>
                   <div 
                     style={{
+                      fontSize: '1.1rem', paddingLeft:"30px",
                       maxHeight: '150px', // Set a max height for the scrollable area
                       overflowY: 'auto',   // Enable vertical scrolling
                     }}

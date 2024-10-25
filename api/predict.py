@@ -146,22 +146,9 @@ def get_beat_meaning(symbol):
         'L': 'Left bundle branch block',
         'R': 'Right bundle branch block',
         'A': 'Atrial premature',
-        'a': 'Aberrated atrial premature',
-        'J': 'Nodal (junctional) premature',
-        'S': 'Supraventricular premature',
         'V': 'Premature ventricular contraction',
-        'F': 'Fusion of ventricular and normal',
-        '[': 'Start of ventricular flutter/fibrillation',
-        '!': 'Ventricular flutter wave',
-        ']': 'End of ventricular flutter/fibrillation',
-        'e': 'Atrial escape',
-        'j': 'Nodal (junctional) escape',
         'E': 'Ventricular escape',
         '/': 'Paced',
-        'f': 'Fusion of paced and normal',
-        'x': 'Non-conducted P-wave (blocked APB)',
-        'Q': 'Unclassifiable',
-        '|': 'Isolated QRS-like artifact',
     }
     return beat_meanings.get(symbol, 'Unknown symbol')
 

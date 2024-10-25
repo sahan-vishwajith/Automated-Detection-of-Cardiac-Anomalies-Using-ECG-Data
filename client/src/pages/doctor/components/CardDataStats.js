@@ -11,7 +11,7 @@ const CardDataStats = ({ title, value, percentage }) => {
       boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', // Slightly smaller shadow
       margin: '5px',
       textAlign: 'left',
-      width: '290px', // Set a fixed width
+      width: '310px', // Set a fixed width
       lineHeight: '0.7', // Add line-height to reduce spacing
       height:'100px',
     },

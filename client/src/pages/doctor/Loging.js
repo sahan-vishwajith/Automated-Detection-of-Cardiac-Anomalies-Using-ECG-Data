@@ -49,7 +49,7 @@ export default function SignIn() {
       });
 
       if (response.ok) {
-        navigate('/Doc'); 
+        navigate('/Doc/patients'); 
       } else {
         alert('Wrong username or password, try again'); 
       }

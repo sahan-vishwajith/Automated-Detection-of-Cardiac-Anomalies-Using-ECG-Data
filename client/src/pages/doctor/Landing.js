@@ -36,7 +36,7 @@ export default function Landing() {
           justifyContent: 'space-between',
           marginTop: '0px',
           flexWrap: 'wrap',
-          width:'600px',
+          width:'580px',
         },
         statsCard: {
           flex: '1 1 200px', // Flexible basis with a minimum size
@@ -62,7 +62,7 @@ export default function Landing() {
           borderRadius: '8px',
           boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
           padding: '20px',
-          height: '400px',
+          height: '100%px',
           width: '100%',
           maxWidth: '670px',
           alignSelf: 'center',
@@ -141,6 +141,7 @@ export default function Landing() {
                 <div style={styles.container}>
                     <div style={{ display: 'flex', justifyContent: 'space-between',}} >
                         <div style={styles.mapContainer}>
+                            <h4>Patient Density Map</h4>
                         <UserMap />
                         </div>
                         

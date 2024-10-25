@@ -1,11 +1,15 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import page_image from './photos/page_image.jpg';
-import patientImg from './photos/patient.jpg'
+import page_image from './photos/bachground.jpg';
+import patientImg from './photos/handsome-confident-smiling-man-with-hands-crossed-chest.jpg'
 import { Link } from 'react-router-dom';
 import LogOutBttn from '../../components/LogOutbttn.js';
 import Button from '@mui/material/Button';
+import HeartDiseaseCard from './HeartArrhythmiaCard.js';
+
+const ecgSampleData = [0.2, 0.3, 0.15, -0.2, 0.25,]; // Replace with actual ECG data
+
 
 export default function PatientCard() {
   const location = useLocation();
@@ -36,8 +40,8 @@ export default function PatientCard() {
       </Box>
       <Card
         sx={{
-          width: '50vw',  // 60% of the window width
-          height: '60vh', // 50% of the window height
+          width: '22vw',  // 60% of the window width
+          height: '80vh', // 50% of the window height
           background: "rgba(255, 255, 255, 0.8)",
           borderRadius: '16px',
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
@@ -45,16 +49,25 @@ export default function PatientCard() {
           WebkitBackdropFilter: 'blur(5px)',
           border: '1px solid rgba(167, 29, 239, 0.3)',
           display: 'flex', // Use flexbox for layout
+          paddingLeft:'50px',
         }}
       >
-        <CardMedia
-          component="img"
-          sx={{ width: '40%' }} // Set the width of the image to 40% of the card
-          image={patientImg}
-          alt="Patient Image"
-        />
+        
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 2 }}>
           <CardContent sx={{ flex: '1 0 auto', color: 'black' }}>
+          <CardMedia
+      component="img"
+      height="230"
+      image={patientImg}
+      alt="Patient"
+      sx={{
+        width: 150,       // Set a fixed width for the image
+        height: 150,      // Set a fixed height for the image
+        borderRadius: '50%', // Make it a circle
+        objectFit: 'cover',  // Ensures the image covers the circular frame without distortion
+        border: '3px solid #1565c0' // Optional: adds a colored border around the image
+      }}
+    />
             <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
               {patient.name}
             </Typography>
@@ -103,6 +116,9 @@ export default function PatientCard() {
           <br></br>
         </Box>
       </Card>
-    </Box>
+      <HeartDiseaseCard diseaseName="Left bundle branch block" ecgData={ecgSampleData}
+       />
+      
+      </Box>
   );
 }
