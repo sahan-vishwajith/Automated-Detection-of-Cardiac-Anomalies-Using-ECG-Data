@@ -11,7 +11,13 @@ import {
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
-const ComparisonComponent = () => {
+const ComparisonComponent = ({ dataDict }) => {
+  const maleCount = dataDict.male || 0;
+  const femaleCount = dataDict.female || 0;
+  const total = maleCount + femaleCount;
+  const malePercentage = total ? ((maleCount / total) * 100).toFixed(1) : 0;
+  const femalePercentage = total ? ((femaleCount / total) * 100).toFixed(1) : 0;
+
   const styles = {
     container: {
       display: 'flex',
@@ -21,11 +27,11 @@ const ComparisonComponent = () => {
       backgroundColor: '#fff',
       borderRadius: '8px',
       boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-      maxWidth: '440px', // Set a maximum width for the component
-      width: '100%', // Full width to make it responsive
+      maxWidth: '440px',
+      width: '100%',
       height: '150px',
-      marginLeft:'0px', // Set a fixed height for the component
-      margin: '0 ', // Center the component horizontally
+      marginLeft: '0px',
+      margin: '0',
     },
     percentage: {
       fontSize: '2rem',
@@ -56,8 +62,8 @@ const ComparisonComponent = () => {
       color: '#555',
     },
     chartContainer: {
-      width: '100px', // Set a fixed width for the chart
-      height: '100%', // Set a fixed height for the chart
+      width: '100px',
+      height: '100%',
     },
   };
 
@@ -66,7 +72,7 @@ const ComparisonComponent = () => {
     labels: ['', ''],
     datasets: [
       {
-        data: [80, 60],
+        data: [maleCount,femaleCount],
         backgroundColor: ['rgb(130,1,203)', 'rgba(54, 162, 235, 0.6)'],
       },
     ],
@@ -74,28 +80,28 @@ const ComparisonComponent = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Prevents the aspect ratio from maintaining
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // Hide legend
+        display: false,
       },
     },
     scales: {
       x: {
         grid: {
-            display: false, // Hide x-axis grid lines
-          },
+          display: false,
+        },
         ticks: {
-          color: '#555', // Customize x-axis tick color
+          color: '#555',
         },
       },
       y: {
         beginAtZero: true,
         grid: {
-            display: false, // Hide y-axis grid lines
-          },
+          display: false,
+        },
         ticks: {
-            display: false, // Display percentage on y-axis
+          display: false,
         },
       },
     },
@@ -105,7 +111,7 @@ const ComparisonComponent = () => {
     <div style={styles.container}>
       <div style={styles.icon}>
         <div style={styles.femaleIcon}>🚺</div>
-        <div style={styles.percentage}>80%</div>
+        <div style={styles.percentage}>{femalePercentage}%</div>
         <div style={styles.label}>Female</div>
       </div>
       <div style={styles.chartContainer}>
@@ -113,7 +119,7 @@ const ComparisonComponent = () => {
       </div>
       <div style={styles.icon}>
         <div style={styles.maleIcon}>🚹</div>
-        <div style={styles.percentage}>60%</div>
+        <div style={styles.percentage}>{malePercentage}%</div>
         <div style={styles.label}>Male</div>
       </div>
     </div>
