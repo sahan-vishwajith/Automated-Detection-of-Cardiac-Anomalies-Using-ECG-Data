@@ -10,21 +10,17 @@ import {
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChartComponent = () => {
+const PieChartComponent = ({ dataCounts }) => {
+  // Generate labels and data arrays from the dataCounts prop
+  const labels = Object.keys(dataCounts);
+  const dataValues = Object.values(dataCounts);
+
   // Data for the pie chart
   const data = {
-    labels: [
-      'Category 1',
-      'Category 2',
-      'Category 3',
-      'Category 4',
-      'Category 5',
-      'Category 6',
-      'Category 7',
-    ],
+    labels: labels,
     datasets: [
       {
-        data: [12, 19, 3, 5, 2, 3, 7], // Replace these values with your actual data
+        data: dataValues,
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
@@ -32,7 +28,7 @@ const PieChartComponent = () => {
           'rgba(75, 192, 192, 0.6)',
           'rgba(153, 102, 255, 0.6)',
           'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 0, 255, 0.6)', // Additional colors for the new categories
+          'rgba(255, 0, 255, 0.6)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -67,8 +63,8 @@ const PieChartComponent = () => {
   };
 
   return (
-    <div style={{ width: '420px', height: '420px', margin: '10 auto' }}>
-      <h4 style={{ padding:'6px',margin: '0 auto'}}>Overall Cardiac Disease type Percentages</h4>
+    <div style={{ width: '420px', height: '420px', margin: '10px auto' }}>
+      <h4 style={{ padding: '6px', margin: '0 auto' }}>Overall Cardiac Disease Type Percentages</h4>
       <Pie data={data} options={options} />
     </div>
   );

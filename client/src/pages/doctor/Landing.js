@@ -12,7 +12,59 @@ import ComparisonComponent from './components/ComparisonComponent';
 import PieChartComponent from './components/PieChartComponent';
 import ScrollableTable from './components/ScrollableTable';
 import WelcomeCard from './components/WelcomeCard';
+import { useState, useEffect } from "react";
+
 export default function Landing() {
+    const cc = {
+        "male": 1,
+        "female": 0
+    }
+  const [docCount, setDocCount] = useState(null);
+  const [patientCount, setPatientCount] = useState(null);
+  const [predictComp, setPredictComp] = useState(null);
+  const [genderCount, setGenderComp]= useState(null)
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Define async functions to fetch data from each API endpoint
+    const fetchDocCount = async () => {
+        const response = await fetch('http://localhost:3000/docCount');
+        const data = await response.json();
+        setDocCount(data.totalDocCount);
+      };
+  
+      const fetchPatientCount = async () => {
+        const response = await fetch('http://localhost:3000/patientCount');
+        const data = await response.json();
+        setPatientCount(data.totalPatientCount);
+      };
+  
+      const fetchPredictComp = async () => {
+        const response = await fetch('http://localhost:3000/predComp');
+        const data = await response.json();
+        setPredictComp(data.predictionComposition);
+      };
+
+      const fetchGenderComp = async () => {
+        const response = await fetch('http://localhost:3000/genderCount');
+        const data = await response.json();
+        console.log(data)
+        setGenderComp(data.composition);
+      };
+
+    // Call each function and set loading to false when all are done
+    const fetchAllData = async () => {
+      try {
+        await Promise.all([fetchDocCount(), fetchPatientCount(), fetchPredictComp(), fetchGenderComp()]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, []);
     const styles = {
         dashboard: {
           padding: '0px',
@@ -68,6 +120,10 @@ export default function Landing() {
           alignSelf: 'center',
         },
       };
+
+      if (loading) {
+        return <p>Loading data...</p>; // Display loading message or spinner if data is still loading
+      }
     return (
         // <div 
         // style={{
@@ -81,7 +137,7 @@ export default function Landing() {
         // }}
         // >
         //     <Navbar />
-            
+         
         <div style={styles.dashboard}>
             <Navbar />
             <WelcomeCard />
@@ -92,15 +148,15 @@ export default function Landing() {
                         <div style={styles.row}>
                             <div style={styles.row}>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered patient" value="2,390" percentage={4.7} />
+                                    <StatsCard title="Total registered patient" value={patientCount} percentage={(patientCount)/(patientCount + docCount)} />
                                 </div>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered doctors" value="2,390" percentage={4.7} />
+                                    <StatsCard title="Total registered doctors" value={docCount} percentage={(docCount)/(patientCount + docCount)} />
                                 </div>
                             </div>
                             <div style={styles.row}>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Prediction Accuracy" value="2,390" percentage={4.7} />
+                                    <StatsCard title="Prediction Accuracy" value="98" percentage={4.7} />
                                 </div>
                                 <div style={styles.statsCard}>
                                     <StatsCard title="Avg prediction time" value="2,390" percentage={4.7} />
@@ -127,13 +183,13 @@ export default function Landing() {
                             height:'430px',
                             marginBottom:'30px',
                         }}>
-                            <PieChartComponent />
+                            <PieChartComponent dataCounts={predictComp} />
                         </div>
                         <div style={{ 
                             width:'440px',
                             marginBottom:'30px',
                         }}>
-                        <ComparisonComponent />
+                        <ComparisonComponent dataDict={genderCount}/>
                         </div>
                     </div>
                 </div>
@@ -149,6 +205,6 @@ export default function Landing() {
                 </div>
             </div>
         </div>
-        
+         
     );
 }

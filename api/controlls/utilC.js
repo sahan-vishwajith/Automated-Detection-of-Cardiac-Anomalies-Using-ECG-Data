@@ -6,7 +6,6 @@ export const processPredictions = async (req, res, next) => {
     const pid = req.body.patientId; 
     const prediction = req.body.medical;
     const date = req.body.date
-
     try {
         const patient = await Patient.findOneAndUpdate(
             { idNumber: pid }, 
@@ -19,7 +18,7 @@ export const processPredictions = async (req, res, next) => {
         }
 
         const newPrediction = new Predictions({
-            prediciton:prediction,
+            prediction:prediction,
             date: date,
             gender:patient.gender,
             district:patient.district,
@@ -90,4 +89,26 @@ export const getPredictionComposition = async (req,res,next)=>{
         // Handle any errors that occur
         next(error);
       }
+}
+
+export const getGenderComposition = async(req,res,next)=>{
+  try {
+    const genderComposition = await Patient.aggregate([
+      {
+        $group: {
+          _id: "$gender",  // Group by gender
+          count: { $sum: 1 } // Count the number of documents for each gender
+        }
+      }
+    ]);
+
+    // Transform the result to a more readable format if needed
+    const composition = {
+      male: genderComposition.find(g => g._id === 'Male')?.count || 0,
+      female: genderComposition.find(g => g._id === 'Female')?.count || 0
+    };
+    res.status(200).json({ composition});
+  } catch (error) {
+    next(error);
+  }
 }
