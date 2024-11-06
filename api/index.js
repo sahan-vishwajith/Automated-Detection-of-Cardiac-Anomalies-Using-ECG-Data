@@ -7,6 +7,7 @@ import adminRoute from "./routes/admin.js"
 import patientRoute from "./routes/patient.js"
 import cookieParser from "cookie-parser"
 import generalRoute from "./routes/general.js"
+import dbRoute from "./routes/db.js"
 
 
 const app = express()
@@ -38,6 +39,7 @@ app.use(cors({
 app.use('/Doc',doctorRoute)
 app.use('/Admin', adminRoute)
 app.use('/Patient',patientRoute)
+app.use('/db',dbRoute)
 app.use('',generalRoute)
 
 app.use((err,req,res,next)=>{
