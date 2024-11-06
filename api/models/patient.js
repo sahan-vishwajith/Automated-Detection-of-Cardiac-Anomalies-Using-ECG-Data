@@ -46,10 +46,6 @@ const PatientSchema = new mongoose.Schema({
     district: {
         type: String,
     },
-    coords: {
-        type: [Number], // Array of numbers to store latitude and longitude
-        index: '2dsphere' // Indexing for geospatial queries
-    }
 });
 
 export default mongoose.model("Patient", PatientSchema);
