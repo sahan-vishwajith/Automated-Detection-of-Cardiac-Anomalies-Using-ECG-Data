@@ -222,7 +222,7 @@ export default function Landing() {
                     <div style={{ display: 'flex', justifyContent: 'space-between',}} >
                         <div style={styles.mapContainer}>
                             <h4>Patient Density Map</h4>
-                        <UserMap locationCounts={districtComp} />
+                        <UserMap locationCounts={locationCounts} />
                         </div>
                         
                     </div>

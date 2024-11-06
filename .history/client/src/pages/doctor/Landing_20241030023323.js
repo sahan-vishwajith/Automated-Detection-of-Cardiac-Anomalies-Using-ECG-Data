@@ -15,40 +15,11 @@ import WelcomeCard from './components/WelcomeCard';
 import { useState, useEffect } from "react";
 
 import calender from'./photos/calendar_16290939.png'
-import patient from'./photos/patient_15090791.png'
-import doctor from'./photos/doctor_4131330.png'
-import target from'./photos/target_10634893.png'
 
 export default function Landing() {
-    const locationCounts={
-        "Trincomalee": 10,
-        "Mullaitivu": 5,
-        "Jaffna": 20,
-        "Kilinochchi": 8,
-        "Mannar": 12,
-        "Galle": 15,
-        "Puttalam": 7,
-        "Kalutara": 9,
-        "Gampaha": 30,
-        "Anuradhapura": 18,
-        "Matale": 14,
-        "Hambantota": 11,
-        "Ratnapura": 16,
-        "Badulla": 13,
-        "Monaragala": 6,
-        "Kegalle": 4,
-        "Kandy": 25,
-        "Ampara": 3,
-        "Vavuniya": 2,
-        "Colombo": 40,
-        "Matara": 170,
-        "Kurunegala": 22,
-        "Polonnaruwa": 19,
-        "Nuwara Eliya": 10
-      }
     const cc = {
-        "Male": 1,
-        "Female": 0
+        "male": 1,
+        "female": 0
     }
   const [docCount, setDocCount] = useState(null);
   const [patientCount, setPatientCount] = useState(null);
@@ -56,7 +27,7 @@ export default function Landing() {
   const [genderCount, setGenderComp]= useState(null)
   const [districtComp, setDistrictComp]= useState(null)
   const [loading, setLoading] = useState(true);
-  console.log(districtComp)
+
   useEffect(() => {
     // Define async functions to fetch data from each API endpoint
     const fetchDocCount = async () => {
@@ -86,7 +57,7 @@ export default function Landing() {
       const fetchDistrictComp = async () => {
         const response = await fetch('http://localhost:3000/districtComp');
         const data = await response.json();
-        setDistrictComp(data);
+        setGenderComp(data);
       };
 
     // Call each function and set loading to false when all are done
@@ -172,18 +143,18 @@ export default function Landing() {
                         <div style={styles.row}>
                             <div style={styles.row}>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered patient" value={patientCount} percentage={(patientCount)/(patientCount + docCount)} icon={patient} />
+                                    <StatsCard title="Total registered patient" value={patientCount} percentage={(patientCount)/(patientCount + docCount)} icon={calender} />
                                 </div>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered doctors" value={docCount} percentage={(docCount)/(patientCount + docCount)} icon={doctor} />
+                                    <StatsCard title="Total registered doctors" value={docCount} percentage={(docCount)/(patientCount + docCount)} />
                                 </div>
                             </div>
                             <div style={styles.row}>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Prediction Accuracy" value="98" percentage={4.7} icon={target}/>
+                                    <StatsCard title="Prediction Accuracy" value="98" percentage={4.7} />
                                 </div>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Avg prediction time" value="2,390" percentage={4.7} icon={calender} />
+                                    <StatsCard title="Avg prediction time" value="2,390" percentage={4.7} />
                                 </div>
                             </div>
                             <div style={{ paddingRight: '50px',
@@ -222,7 +193,7 @@ export default function Landing() {
                     <div style={{ display: 'flex', justifyContent: 'space-between',}} >
                         <div style={styles.mapContainer}>
                             <h4>Patient Density Map</h4>
-                        <UserMap locationCounts={districtComp} />
+                        <UserMap />
                         </div>
                         
                     </div>

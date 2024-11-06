@@ -74,7 +74,7 @@ const ComparisonComponent = ({ dataDict }) => {
     labels: ['', ''],
     datasets: [
       {
-        data: [femaleCount,maleCount],
+        data: [maleCount,femaleCount],
         backgroundColor: ['rgb(130,1,203)', 'rgba(54, 162, 235, 0.6)'],
       },
     ],

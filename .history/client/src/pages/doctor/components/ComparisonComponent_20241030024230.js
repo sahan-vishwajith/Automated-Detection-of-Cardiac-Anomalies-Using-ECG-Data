@@ -12,12 +12,10 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
 const ComparisonComponent = ({ dataDict }) => {
-  console.log(dataDict)
-
   const maleCount = dataDict.male || 0;
   const femaleCount = dataDict.female || 0;
   const total = maleCount + femaleCount;
-  const malePercentage = total ? ((maleCount / total) * 100).toFixed(1) : 0;  ;
+  const malePercentage = maleCount;
   const femalePercentage = total ? ((femaleCount / total) * 100).toFixed(1) : 0;
 
   const styles = {
@@ -74,7 +72,7 @@ const ComparisonComponent = ({ dataDict }) => {
     labels: ['', ''],
     datasets: [
       {
-        data: [femaleCount,maleCount],
+        data: [maleCount,femaleCount],
         backgroundColor: ['rgb(130,1,203)', 'rgba(54, 162, 235, 0.6)'],
       },
     ],

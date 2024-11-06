@@ -18,34 +18,33 @@ import calender from'./photos/calendar_16290939.png'
 import patient from'./photos/patient_15090791.png'
 import doctor from'./photos/doctor_4131330.png'
 import target from'./photos/target_10634893.png'
-
+locationCounts={
+    "Trincomalee": 10,
+    "Mullaitivu": 5,
+    "Jaffna": 20,
+    "Kilinochchi": 8,
+    "Mannar": 12,
+    "Galle": 15,
+    "Puttalam": 7,
+    "Kalutara": 9,
+    "Gampaha": 30,
+    "Anuradhapura": 18,
+    "Matale": 14,
+    "Hambantota": 11,
+    "Ratnapura": 16,
+    "Badulla": 13,
+    "Monaragala": 6,
+    "Kegalle": 4,
+    "Kandy": 25,
+    "Ampara": 3,
+    "Vavuniya": 2,
+    "Colombo": 40,
+    "Matara": 17,
+    "Kurunegala": 22,
+    "Polonnaruwa": 19,
+    "Nuwara Eliya": 10
+  }
 export default function Landing() {
-    const locationCounts={
-        "Trincomalee": 10,
-        "Mullaitivu": 5,
-        "Jaffna": 20,
-        "Kilinochchi": 8,
-        "Mannar": 12,
-        "Galle": 15,
-        "Puttalam": 7,
-        "Kalutara": 9,
-        "Gampaha": 30,
-        "Anuradhapura": 18,
-        "Matale": 14,
-        "Hambantota": 11,
-        "Ratnapura": 16,
-        "Badulla": 13,
-        "Monaragala": 6,
-        "Kegalle": 4,
-        "Kandy": 25,
-        "Ampara": 3,
-        "Vavuniya": 2,
-        "Colombo": 40,
-        "Matara": 170,
-        "Kurunegala": 22,
-        "Polonnaruwa": 19,
-        "Nuwara Eliya": 10
-      }
     const cc = {
         "Male": 1,
         "Female": 0
@@ -222,7 +221,7 @@ export default function Landing() {
                     <div style={{ display: 'flex', justifyContent: 'space-between',}} >
                         <div style={styles.mapContainer}>
                             <h4>Patient Density Map</h4>
-                        <UserMap locationCounts={districtComp} />
+                        <UserMap locationCounts={locationCounts} />
                         </div>
                         
                     </div>

@@ -17,7 +17,7 @@ const generateColorByDensity = (density, maxDensity) => {
   const normalizedDensity = Math.min(density / maxDensity, 1);
   let r, g, b;
   if (normalizedDensity < 0.2) {
-    r = Math.floor(255 * (normalizedDensity / 0.2)); g = 0; b = 0;
+    r = 0; g = Math.floor(255 * (normalizedDensity / 0.2)); b = 0;
   } else if (normalizedDensity < 0.4) {
     r = 100; g = 10; b = 0;
   } else if (normalizedDensity < 0.6) {

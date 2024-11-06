@@ -5,23 +5,24 @@ import background from './digital-health-medical-research-background-with-heartb
 const WelcomeCard = () => {
   const styles = {
     card: {
-      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: '20px',
-      backgroundColor: 'rgba(230, 247, 255, 0.8)', // Semi-transparent background color
+      backgroundColor: 'rgba(230, 247, 255, 0.9)', // Semi-transparent overlay color
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       borderRadius: '10px',
       boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
       width: '100%',
       maxWidth: '1400px',
       margin: '20px auto',
+      opacity: 0.1, // Set transparency (0 is fully transparent, 1 is fully opaque)
       zIndex: 1,
     },
     textContainer: {
       flex: 1,
-      position: 'relative', // Ensure text is above the background
-      zIndex: 2,
     },
     title: {
       fontSize: '24px',
@@ -35,37 +36,22 @@ const WelcomeCard = () => {
     imageContainer: {
       position: 'relative',
       width: '200px',
-      height: '100px',
+      height: '100px', // Set the container height to match the desired image height
       overflow: 'hidden',
       marginLeft: '20px',
     },
     image: {
       width: '100%',
-      height: '100%',
-      objectFit: 'contain',
+      height: '100%', // Set the height to 100% to fit the container
+      objectFit: 'contain', // Use 'contain' to maintain the aspect ratio
       position: 'absolute',
       top: '0',
       left: '0',
-    },
-    backgroundImage: {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundImage: `url(${background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      opacity: 0.4, // Control opacity here
-      zIndex: 0, // Behind the text
-      borderRadius: '10px', // Match the card's border radius
     },
   };
 
   return (
     <div style={styles.card}>
-      <div style={styles.backgroundImage} />
       <div style={styles.textContainer}>
         <div style={styles.title}>Welcome to CardioCare</div>
         <div style={styles.subtitle}>
@@ -74,7 +60,7 @@ const WelcomeCard = () => {
       </div>
       <div style={styles.imageContainer}>
         <img
-          src={logo}
+          src={logo} // Use the imported logo image
           alt="Logo"
           style={styles.image}
         />

@@ -41,7 +41,7 @@ export default function Landing() {
         "Ampara": 3,
         "Vavuniya": 2,
         "Colombo": 40,
-        "Matara": 170,
+        "Matara": 17,
         "Kurunegala": 22,
         "Polonnaruwa": 19,
         "Nuwara Eliya": 10
@@ -222,7 +222,7 @@ export default function Landing() {
                     <div style={{ display: 'flex', justifyContent: 'space-between',}} >
                         <div style={styles.mapContainer}>
                             <h4>Patient Density Map</h4>
-                        <UserMap locationCounts={districtComp} />
+                        <UserMap locationCounts={locationCounts} />
                         </div>
                         
                     </div>

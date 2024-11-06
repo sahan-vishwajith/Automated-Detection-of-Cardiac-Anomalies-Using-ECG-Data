@@ -57,7 +57,7 @@ const WelcomeCard = () => {
       backgroundImage: `url(${background})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      opacity: 0.4, // Control opacity here
+      opacity: 0.5, // Control opacity here
       zIndex: 0, // Behind the text
       borderRadius: '10px', // Match the card's border radius
     },
