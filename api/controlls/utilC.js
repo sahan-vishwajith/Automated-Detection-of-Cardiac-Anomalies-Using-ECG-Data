@@ -43,7 +43,7 @@ export const getTotalDocCount = async (req,res,next)=>{
 
 export const getTotalPatientCount = async (req,res,next)=>{
     try {
-        const patientCount = await Doctor.countDocuments({});
+        const patientCount = await Patient.countDocuments({});
         res.status(200).json({ totalPatientCount: patientCount });
       } catch (error) {
         next(error);
