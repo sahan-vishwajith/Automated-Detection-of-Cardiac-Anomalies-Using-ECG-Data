@@ -172,10 +172,10 @@ export default function Landing() {
                         <div style={styles.row}>
                             <div style={styles.row}>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered patient" value={patientCount} percentage={(patientCount)/(patientCount + docCount)} icon={patient} />
+                                    <StatsCard title="Total registered patient" value={patientCount} percentage={((patientCount)/(patientCount + docCount)*10).toFixed(2)} icon={patient} />
                                 </div>
                                 <div style={styles.statsCard}>
-                                    <StatsCard title="Total registered doctors" value={docCount} percentage={(docCount)/(patientCount + docCount)} icon={doctor} />
+                                    <StatsCard title="Total registered doctors" value={docCount} percentage={((docCount)/(patientCount + docCount)*10).toFixed(2)} icon={doctor} />
                                 </div>
                             </div>
                             <div style={styles.row}>
